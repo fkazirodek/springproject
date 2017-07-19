@@ -11,11 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -31,16 +32,18 @@ public class User implements Serializable {
 	private String firstName;
 	@Column(name = "lastname")
 	private String lastName;
-	@NotNull
+	@NotEmpty
 	@Column(nullable = false, unique = true)
 	private String username;
-	@NotNull
+	@NotEmpty
 	@Email
 	private String email;
-	@NotNull
+	@NotEmpty
 	private String password;
 	@Embedded
 	private Address address;
+	@ManyToOne
+	private UserRole role;
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -118,5 +121,12 @@ public class User implements Serializable {
 		this.userItems = userItems;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 
 }

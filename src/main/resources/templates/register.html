@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:insert = "fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form action="" method="post" id="fileForm" role="form">
+					<fieldset>
+						<legend class="text-center">
+							Rejestracja nowego użytkownika <span class="req"></span>
+						</legend>
+
+						<div class="form-group">
+							<label for="firstname"> Imię: </label> <input
+								class="form-control" type="text" name="firstname" id="txt"
+								onkeyup="Validate(this)" required />
+							<div id="errFirst"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="lastname">Nazwisko: </label> <input
+								class="form-control" type="text" name="lastname" id="txt"
+								onkeyup="Validate(this)" required />
+							<div id="errLast"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="email">Adres Email: </label> <input
+								class="form-control" required type="email" name="email"
+								id="email" onchange="email_validate(this.value);" />
+							<div class="status" id="status"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="username"> Nazwa uzytkownika: <small>To
+									będzie również Twój login</small>
+							</label> <input class="form-control" type="text" name="username" id="txt"
+								onkeyup="Validate(this)" placeholder="minimum 6 znaków" required />
+							<div id="errLast"></div>
+						</div>
+
+						<div class="form-group">
+							<label for="password">Hasło: </label> <input required
+								name="password" type="password" class="form-control inputpass"
+								minlength="4" maxlength="16" id="pass1" />
+							
+
+							<label for="password">Potwierdz hasło: </label> <input required
+								name="password" type="password" class="form-control inputpass"
+								minlength="4" maxlength="16" id="pass2"
+								onkeyup="checkPass(); return false;" /> <span
+								id="confirmMessage" class="confirmMessage"></span>
+						</div>
+
+						<div class="form-group">
+							<input class="btn btn-success" type="submit" name="register"
+								value="Zarejestruj">
+						</div>
+					</fieldset>
+				</form>
+				<!-- ends register form -->
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
