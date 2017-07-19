@@ -1,12 +1,16 @@
 package pl.simplebuying.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
 
+	@Column(nullable=true)
 	private String city;
+	@Column(nullable=true)
 	private String street;
+	@Column(nullable=true)
 	private String zipCode;
 	
 	public Address() {}

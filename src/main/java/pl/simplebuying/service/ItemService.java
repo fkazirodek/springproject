@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import pl.simplebuying.model.Item;
 import pl.simplebuying.repository.ItemRepository;
 
-
 public class ItemService {
 
 	@Autowired

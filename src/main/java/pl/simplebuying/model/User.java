@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -42,8 +41,8 @@ public class User implements Serializable {
 	private String password;
 	@Embedded
 	private Address address;
-	@ManyToOne
-	private UserRole role;
+	@NotEmpty
+	private String role;
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -127,6 +126,14 @@ public class User implements Serializable {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

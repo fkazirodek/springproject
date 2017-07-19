@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -29,11 +28,11 @@ public class Item implements Serializable {
 	private String itemName;
 	@NotEmpty
 	private String description;
-	@NotNull
+	@NotEmpty
 	private BigDecimal price;
-	@NotNull
+	@NotEmpty
 	private int quantity;
-	@NotNull
+	@NotEmpty
 	@ManyToOne
 	private Category category;
 	@ManyToOne

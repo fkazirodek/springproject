@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Bootstrap Example</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
@@ -14,12 +14,12 @@
 </head>
 <body>
 
-	<div th:insert = "fragments :: navbar"></div>
+	<div th:include = "fragments :: navbar"></div>
 
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<form action="" method="post" id="fileForm" role="form">
+				<form th:action="@{/register}" method="post" th:object="${user}" id="fileForm">
 					<fieldset>
 						<legend class="text-center">
 							Rejestracja nowego użytkownika <span class="req"></span>
@@ -28,21 +28,21 @@
 						<div class="form-group">
 							<label for="firstname"> Imię: </label> <input
 								class="form-control" type="text" name="firstname" id="txt"
-								onkeyup="Validate(this)" required />
+								onkeyup="Validate(this)" th:field="*{firstName}"/>
 							<div id="errFirst"></div>
 						</div>
 
 						<div class="form-group">
 							<label for="lastname">Nazwisko: </label> <input
 								class="form-control" type="text" name="lastname" id="txt"
-								onkeyup="Validate(this)" required />
+								onkeyup="Validate(this)" th:field="*{lastName}" />
 							<div id="errLast"></div>
 						</div>
 
 						<div class="form-group">
 							<label for="email">Adres Email: </label> <input
-								class="form-control" required type="email" name="email"
-								id="email" onchange="email_validate(this.value);" />
+								class="form-control" type="email" name="email"
+								id="email" onchange="email_validate(this.value);"  th:field="*{email}" />
 							<div class="status" id="status"></div>
 						</div>
 
@@ -50,17 +50,17 @@
 							<label for="username"> Nazwa uzytkownika: <small>To
 									będzie również Twój login</small>
 							</label> <input class="form-control" type="text" name="username" id="txt"
-								onkeyup="Validate(this)" placeholder="minimum 6 znaków" required />
+								onkeyup="Validate(this)" placeholder="minimum 6 znaków"  th:field="*{username}" />
 							<div id="errLast"></div>
 						</div>
 
 						<div class="form-group">
-							<label for="password">Hasło: </label> <input required
+							<label for="password">Hasło: </label> <input
 								name="password" type="password" class="form-control inputpass"
-								minlength="4" maxlength="16" id="pass1" />
+								minlength="4" maxlength="16" id="pass1" th:field="*{password}" />
 							
 
-							<label for="password">Potwierdz hasło: </label> <input required
+							<label for="password">Potwierdz hasło: </label> <input
 								name="password" type="password" class="form-control inputpass"
 								minlength="4" maxlength="16" id="pass2"
 								onkeyup="checkPass(); return false;" /> <span
@@ -69,7 +69,7 @@
 
 						<div class="form-group">
 							<input class="btn btn-success" type="submit" name="register"
-								value="Zarejestruj">
+								value="Zarejestruj"/>
 						</div>
 					</fieldset>
 				</form>
