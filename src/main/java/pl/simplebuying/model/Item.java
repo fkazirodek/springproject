@@ -2,15 +2,15 @@ package pl.simplebuying.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +23,7 @@ public class Item implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_item")
 	private Long id;
 	@Column(name = "item_name", nullable = false)
 	private String itemName;
@@ -35,15 +36,11 @@ public class Item implements Serializable {
 	@NotNull
 	@ManyToOne
 	private Category category;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(nullable = false)
 	private User seller;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable(name = "item_buyer", 
-			   joinColumns = @JoinColumn(name = "item_id"), 
-			   inverseJoinColumns = @JoinColumn(name = "buyer_id", nullable = false))
-	private User buyer;
+	@ManyToMany
+	private List<Order> orders;
 
 	public Item() {
 	}

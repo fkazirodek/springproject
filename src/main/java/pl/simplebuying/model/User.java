@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +32,7 @@ public class User implements Serializable {
 	@Column(name = "lastname")
 	private String lastName;
 	@NotNull
-	@Column(nullable = false, unique = true, length = 16)
+	@Column(nullable = false, unique = true)
 	private String username;
 	@NotNull
 	@Email
@@ -42,22 +41,21 @@ public class User implements Serializable {
 	private String password;
 	@Embedded
 	private Address address;
-	@OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
-	@OneToMany(mappedBy = "buyer")
-	private List<Item> boughtItems = new ArrayList<>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Order> orders = new ArrayList<>();
 
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String username, String email, String password, Address address) {
+	public User(String firstName, String lastName, String username, String email, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.address = address;	
 	}
 
 	public Long getId() {
@@ -119,16 +117,6 @@ public class User implements Serializable {
 	public void setUserItems(List<Item> userItems) {
 		this.userItems = userItems;
 	}
-
-	public List<Item> getBoughtItems() {
-		return boughtItems;
-	}
-
-	public void setBoughtItems(List<Item> boughtItems) {
-		this.boughtItems = boughtItems;
-	}
-
-	
 
 
 }
