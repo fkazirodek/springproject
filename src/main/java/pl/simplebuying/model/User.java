@@ -13,9 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 @Table(name = "users")
@@ -27,17 +30,21 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user")
 	private Long id;
+	@NotEmpty(message = "{pl.simplebuying.model.User.firstName.NotEmpty}")
 	@Column(name = "firstname")
 	private String firstName;
+	@NotEmpty(message = "{pl.simplebuying.model.User.lastName.NotEmpty}")
 	@Column(name = "lastname")
 	private String lastName;
 	@NotEmpty
+	@Size(min = 4, max = 16, message = "{pl.simplebuying.model.User.username.Size}")
 	@Column(nullable = false, unique = true)
 	private String username;
-	@NotEmpty
-	@Email
+	@NotEmpty(message = "{pl.pl.simplebuying.model.User.email.NotEmpty}")
+	@Email(message = "{pl.simplebuying.model.User.email.Email}")
 	private String email;
-	@NotEmpty
+	@NotEmpty(message = "pl.simplebuying.model.User.password.NotEmpty")
+	@Min(value = 6, message = "{pl.simplebuying.model.User.password.Min}")
 	private String password;
 	@Embedded
 	private Address address;

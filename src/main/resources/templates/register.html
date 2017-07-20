@@ -27,37 +27,36 @@
 
 						<div class="form-group">
 							<label for="firstname"> Imię: </label> <input
-								class="form-control" type="text" name="firstname" id="txt"
-								onkeyup="Validate(this)" th:field="*{firstName}"/>
-							<div id="errFirst"></div>
+								class="form-control" type="text" name="firstname" id="txt" th:field="*{firstName}"/>
+							<div id="errFirst"><p th:errors="*{firstName}"></p></div>
 						</div>
 
 						<div class="form-group">
 							<label for="lastname">Nazwisko: </label> <input
-								class="form-control" type="text" name="lastname" id="txt"
-								onkeyup="Validate(this)" th:field="*{lastName}" />
-							<div id="errLast"></div>
+								class="form-control" type="text" name="lastname" id="txt" th:field="*{lastName}" />
+							<div id="errLast"><p th:errors="*{lastName}"></p></div>
 						</div>
 
 						<div class="form-group">
 							<label for="email">Adres Email: </label> <input
 								class="form-control" type="email" name="email"
-								id="email" onchange="email_validate(this.value);"  th:field="*{email}" />
-							<div class="status" id="status"></div>
+								id="email" th:field="*{email}" />
+							<div class="errEmail"><p th:errors="*{email}"></p></div>
 						</div>
 
 						<div class="form-group">
 							<label for="username"> Nazwa uzytkownika: <small>To
 									będzie również Twój login</small>
 							</label> <input class="form-control" type="text" name="username" id="txt"
-								onkeyup="Validate(this)" placeholder="minimum 6 znaków"  th:field="*{username}" />
-							<div id="errLast"></div>
+								placeholder="minimum 6 znaków"  th:field="*{username}" />
+							<div><p th:errors="*{username}"></p></div>
 						</div>
 
 						<div class="form-group">
 							<label for="password">Hasło: </label> <input
 								name="password" type="password" class="form-control inputpass"
 								maxlength="16" id="pass" th:field="*{password}" />
+								<div><p th:errors="*{password}"></p></div>
 						</div>
 
 						<div class="form-group">
