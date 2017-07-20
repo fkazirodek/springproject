@@ -42,6 +42,7 @@ public class User implements Serializable {
 	@Embedded
 	private Address address;
 	@NotEmpty
+	@Column(name = "authorization")
 	private String role;
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
@@ -112,6 +113,14 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public List<Item> getUserItems() {
 		return userItems;
 	}
@@ -128,12 +137,5 @@ public class User implements Serializable {
 		this.orders = orders;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 }
