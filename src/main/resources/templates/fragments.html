@@ -50,17 +50,11 @@
 						<button type="submit" class="btn btn-default">Szukaj</button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a sec:authorize="isAnonymous()" th:href="@{/register}">Rejestracja</a></li>
-						<li><a sec:authorize="isAnonymous()" th:href="@{/login}">Zaloguj</a></li>
-						<li>
-							<form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
-								<button type="submit" class="btn btn-link">Wyloguj</button>
-							</form>
-						</li>
-						<li class="dropdown"><a sec:authorize="isAuthenticated()"
-							href="#" class="dropdown-toggle" data-toggle="dropdown" sec:authentication="principal.username">Imie
-								Nazwisko<span class="glyphicon glyphicon-chevron-down"></span>
-						</a>
+						<li sec:authorize="isAnonymous()"><a th:href="@{/register}">Rejestracja</a></li>
+						<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj</a></li>
+						<li class="dropdown" sec:authorize="isAuthenticated()">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" sec:authentication="principal.username"> username
+								<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Profil</a></li>
 								<li><a href="#">Kupione</a></li>
@@ -69,7 +63,14 @@
 								<li><a href="#">Aktualne licytacje</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Koszyk z zakupami</a></li>
-							</ul></li>
+								<li class="divider"></li>
+								<li>
+									<form method="post" th:action="@{/logout}">
+										<button type="submit" class="btn btn-link">Wyloguj</button>
+									</form>
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

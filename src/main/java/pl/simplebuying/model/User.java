@@ -40,16 +40,15 @@ public class User implements Serializable {
 	@Size(min = 4, max = 16, message = "{pl.simplebuying.model.User.username.Size}")
 	@Column(nullable = false, unique = true)
 	private String username;
-	@NotEmpty(message = "{pl.pl.simplebuying.model.User.email.NotEmpty}")
 	@Email(message = "{pl.simplebuying.model.User.email.Email}")
+	@NotEmpty(message = "{pl.simplebuying.model.User.email.NotEmpty}")
 	private String email;
 	@NotEmpty(message = "pl.simplebuying.model.User.password.NotEmpty")
 	@Min(value = 6, message = "{pl.simplebuying.model.User.password.Min}")
 	private String password;
 	@Embedded
 	private Address address;
-	@NotEmpty
-	@Column(name = "authorization")
+	@Column(name = "authorization", nullable = false)
 	private String role;
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
