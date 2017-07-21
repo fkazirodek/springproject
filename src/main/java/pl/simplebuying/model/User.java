@@ -36,14 +36,14 @@ public class User implements Serializable {
 	@NotEmpty(message = "{pl.simplebuying.model.User.lastName.NotEmpty}")
 	@Column(name = "lastname")
 	private String lastName;
-	@NotEmpty
+	@NotEmpty(message = "{pl.simplebuying.model.User.username.NotEmpty}")
 	@Size(min = 4, max = 16, message = "{pl.simplebuying.model.User.username.Size}")
 	@Column(nullable = false, unique = true)
 	private String username;
 	@Email(message = "{pl.simplebuying.model.User.email.Email}")
 	@NotEmpty(message = "{pl.simplebuying.model.User.email.NotEmpty}")
 	private String email;
-	@NotEmpty(message = "pl.simplebuying.model.User.password.NotEmpty")
+	@NotEmpty(message = "{pl.simplebuying.model.User.password.NotEmpty}")
 	@Min(value = 6, message = "{pl.simplebuying.model.User.password.Min}")
 	private String password;
 	@Embedded

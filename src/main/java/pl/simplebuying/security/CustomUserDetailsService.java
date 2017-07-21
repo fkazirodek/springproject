@@ -21,17 +21,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
-		if(user == null) {
+		if (user == null) {
 			throw new UsernameNotFoundException("Użytkowanik o podanej nazwie nie istnieje");
-		} 
-		org.springframework.security.core.userdetails.User userDetails = 
-                new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), addAuthorities(user.getRole()));
+		}
+		org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
+				user.getUsername(), user.getPassword(), addAuthorities(user.getRole()));
 		return userDetails;
 	}
 
 	private Set<GrantedAuthority> addAuthorities(String userRole) {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-            authorities.add(new SimpleGrantedAuthority(userRole));
-        return authorities;
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		authorities.add(new SimpleGrantedAuthority(userRole));
+		return authorities;
 	}
+
 }

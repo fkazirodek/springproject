@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 
 <body>
 
@@ -21,8 +21,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#" th:href="@{/}">Strona
-								Główna</a></li>
+						<li class="active"><a href="#" th:href="@{/}">Strona Główna</a></li>
 						<li><a href="#">O Sklepie</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Kategorie<b class="caret"></b></a>
@@ -56,7 +55,7 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" sec:authentication="principal.username"> username
 								<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Profil</a></li>
+								<li><a href="#" th:href="@{/profile}">Profil</a></li>
 								<li><a href="#">Kupione</a></li>
 								<li><a href="#">Sprzedane</a></li>
 								<li><a href="#">Wystawione</a></li>

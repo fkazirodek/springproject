@@ -21,4 +21,9 @@ public class UserService {
 		user.setRole(DEFAULT_ROLE);
 		userRepository.save(user);
 	}
+	
+	public User findByUserName(String username) {
+		User user = userRepository.findByUsername(username);
+		return user;
+	}
 }
