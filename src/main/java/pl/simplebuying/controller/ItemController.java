@@ -28,8 +28,7 @@ public class ItemController {
 	@GetMapping("/additem")
 	public String addAttributes(Model model) {
 		List<Category> categories = itemService.getAllCategories();
-		Item item = new Item();
-		model.addAttribute(item);
+		model.addAttribute("item", new Item());
 		model.addAttribute("categories", categories);
 		return "add_item";
 	}

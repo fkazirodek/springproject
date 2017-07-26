@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
 
 <body>
 
@@ -21,7 +22,8 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#" th:href="@{/}">Strona Główna</a></li>
+						<li class="active"><a href="#" th:href="@{/}">Strona
+								Główna</a></li>
 						<li><a href="#">O Sklepie</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Kategorie<b class="caret"></b></a>
@@ -51,9 +53,10 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li sec:authorize="isAnonymous()"><a th:href="@{/register}">Rejestracja</a></li>
 						<li sec:authorize="isAnonymous()"><a th:href="@{/login}">Zaloguj</a></li>
-						<li class="dropdown" sec:authorize="isAuthenticated()">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" sec:authentication="principal.username"> username
-								<span class="glyphicon glyphicon-chevron-down"></span></a>
+						<li class="dropdown" sec:authorize="isAuthenticated()"><a
+							href="#" class="dropdown-toggle" data-toggle="dropdown"
+							sec:authentication="principal.username"> username <span
+								class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#" th:href="@{/profile}">Profil</a></li>
 								<li><a href="#">Kupione</a></li>
@@ -68,8 +71,30 @@
 										<button type="submit" class="btn btn-link">Wyloguj</button>
 									</form>
 								</li>
-							</ul>
-						</li>
+							</ul></li>
+						<li sec:authorize="isAuthenticated()" class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-expanded="false"> <span
+								class="glyphicon glyphicon-shopping-cart"></span>2 - Items<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu dropdown-cart" role="menu">
+								<li>
+									<span class="item"> 
+										<span class="item-left">
+											<img src="http://lorempixel.com/50/50/" alt="" /> 
+											<span class="item-info"> 
+												<span>Item name</span> 
+												<span>23$</span>
+											</span>
+										</span> 
+									<span class="item-right">
+											<button class="btn btn-xs btn-danger pull-right">x</button>
+									</span>
+									</span>
+								</li>
+								
+								<li class="divider"></li>
+								<li><a class="text-center" href="">Przejdz do podsumowania</a></li>
+							</ul></li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

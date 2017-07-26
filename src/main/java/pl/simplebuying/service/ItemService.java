@@ -25,6 +25,12 @@ public class ItemService {
 		this.categoryRepository = categoryRepository;
 	}
 	
+	
+	public List<Item> getAllItems() {
+		List<Item> items = itemRepository.findAll();
+		return items;
+	}
+	
 	public void saveItem(Item item, Category category, User seller) {
 		item.setCategory(category);
 		item.setSeller(seller);
@@ -32,9 +38,10 @@ public class ItemService {
 		itemRepository.save(item);
 	}
 
-	public Page<Item> getAllItemsByPage(int page) {
-		Page<Item> allItemsByPage = itemRepository.findAll(new PageRequest(page, 10));
-		return allItemsByPage;
+	public List<Item> getItemsByPage(int page) {
+		Page<Item> itemsByPage = itemRepository.findAll(new PageRequest(page, 10));
+		List<Item> items = itemsByPage.getContent();
+		return items;
 	}	
 	
 	public List<Category> getAllCategories() {
