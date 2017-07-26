@@ -8,20 +8,22 @@ import pl.simplebuying.repository.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	private static final String DEFAULT_ROLE = "ROLE_USER";
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-	
+
 	public void saveUserInDB(User user) {
-		user.setRole(DEFAULT_ROLE);
+		if (user.getRole() == null) {
+			user.setRole(DEFAULT_ROLE);
+		}
 		userRepository.save(user);
 	}
-	
+
 	public User findByUserName(String username) {
 		User user = userRepository.findByUsername(username);
 		return user;

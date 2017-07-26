@@ -1,11 +1,15 @@
 package pl.simplebuying.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Column(nullable=true)
 	private String city;
 	@Column(nullable=true)

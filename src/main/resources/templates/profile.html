@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Profile</title>
@@ -24,11 +24,11 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Panel użytkownika</h3>
 					</div>
-					<a href="#" th:href="@{/profile}" class="list-group-item">Moj Profil</a> 
+					<a href="#" th:href="@{/profile}" class="list-group-item active">Moj Profil</a> 
 					<a href="#" class="list-group-item">Kupione przedmioty</a>
 					<a href="#" class="list-group-item">Sprzedane przedmioty</a>
-					<a href="#" class="list-group-item">Wystawione przedmioty</a>
-					<a href="#" class="list-group-item">Wystaw nowy przedmiot</a>
+					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a>
+					<a href="#" th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -45,9 +45,9 @@
 
 								<div class="col-sm-6">
 									<h4 style="color: #00b1b1;"
-										th:text="|${user.firstName} ${user.lastName}|">Imie
+										th:text="|${session.user.firstName} ${session.user.lastName}|">Imie
 										Nazwisko</h4>
-									<span th:text="${user.username}">login</span>
+									<span th:text="${session.user.username}">login</span>
 								</div>
 								<div class="clearfix"></div>
 								<hr style="margin: 5px 0 5px 0;" />
@@ -57,17 +57,17 @@
 									<h4 style="color: #00b1b1;">Dane osobowe:</h4>
 								</div>
 								<div class="col-sm-5 col-xs-6 tital">Imie:</div>
-								<div class="col-sm-7 col-xs-6" th:text="${user.firstName}"></div>
+								<div class="col-sm-7 col-xs-6" th:text="${session.user.firstName}"></div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Nazwisko:</div>
-								<div class="col-sm-7" th:text="${user.lastName}"></div>
+								<div class="col-sm-7" th:text="${session.user.lastName}"></div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Adres email:</div>
-								<div class="col-sm-7" th:text="${user.email}"></div>
+								<div class="col-sm-7" th:text="${session.user.email}"></div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
@@ -75,20 +75,20 @@
 									<h4 style="color: #00b1b1;">Adres:</h4>
 								</div>
 								<div class="col-sm-5 col-xs-6 tital">Miasto:</div>
-								<div class="col-sm-7" th:if="${address} != null"
-									th:text="${address.city}">nie podano</div>
+								<div class="col-sm-7" th:if="${session.address} != null"
+									th:text="${session.address.city}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Ulica:</div>
-								<div class="col-sm-7" th:if="${address} != null"
-									th:text="${address.street}">nie podano</div>
+								<div class="col-sm-7" th:if="${session.address} != null"
+									th:text="${session.address.street}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Kod pocztowy:</div>
-								<div class="col-sm-7" th:if="${address} != null"
-									th:text="${address.zipCode}">nie podano</div>
+								<div class="col-sm-7" th:if="${session.address} != null"
+									th:text="${session.address.zipCode}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 								<!-- /.box-body -->
@@ -99,8 +99,9 @@
 
 					</div>
 				</div>
+				<a href="#" th:href="@{/profile/update_address}" class="btn btn-sm btn-info">Zmień adres <span class="glyphicon glyphicon-wrench"></span></a>
 			</div>
-			<a href="#" class="btn btn-sm btn-info">Zmień adres <span class="glyphicon glyphicon-wrench"></span></a>
+			
 		</div>
 	</div>
 

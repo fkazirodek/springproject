@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Profile</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:include="fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel użytkownika</h3>
+					</div>
+					<a href="#" th:href="@{/profile}" class="list-group-item">Moj
+						Profil</a> <a href="#" class="list-group-item">Kupione przedmioty</a>
+					<a href="#" class="list-group-item">Sprzedane przedmioty</a> <a
+						href="#" class="list-group-item">Wystawione przedmioty</a> <a
+						th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a>
+				</div>
+			</div>
+			<div class="col-md-8">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Profil użytkownika</h4>
+					</div>
+					<div class="panel-body">
+
+						<div class="box box-info">
+
+							<div class="box-body">
+
+								<form th:action="@{/profile/update_address}" method="post" th:object="${address}" class="form-horizontal">
+									<fieldset>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="textinput">Miasto</label>
+											<div class="col-md-6">
+												<input id="textinput" name="city"
+													placeholder="wpisz nazwę miasta"
+													class="form-control input-md" type="text" th:field="*{city}"/>
+
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="street">Ulica
+												i numer domu/mieszkania</label>
+											<div class="col-md-6">
+												<input id="street" name="street"
+													placeholder="wpisz ulice i numer"
+													class="form-control input-md" type="text" th:field="*{street}"/>
+
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="zipCode">Kod
+												pocztowy</label>
+											<div class="col-md-6">
+												<input id="zipCode" name="zipCode"
+													placeholder="wpisz kod pocztowy"
+													class="form-control input-md" type="text" th:field="*{zipCode}"/>
+
+											</div>
+										</div>
+
+										<!-- Button -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="confirmButton"></label>
+											<div class="col-md-4">
+												<button id="confirmButton" name="confirmButton"
+													class="btn btn-info">Zatwierdz zmiany</button>
+											</div>
+										</div>
+
+									</fieldset>
+								</form>
+
+								<!-- /.box-body -->
+							</div>
+							<!-- /.box -->
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -28,15 +29,15 @@ public class Item implements Serializable {
 	private String itemName;
 	@NotEmpty
 	private String description;
-	@NotEmpty
+	@NotNull
 	private BigDecimal price;
-	@NotEmpty
-	private int quantity;
-	@NotEmpty
+	@NotNull
+	private Integer quantity;
+	@NotNull
 	@ManyToOne
 	private Category category;
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(name= "seller_id", nullable = false)
 	private User seller;
 	@ManyToMany
 	private List<Order> orders;
@@ -44,13 +45,12 @@ public class Item implements Serializable {
 	public Item() {
 	}
 
-	public Item(String itemName, String description, BigDecimal price, Category category, User seller) {
+	public Item(String itemName, String description, BigDecimal price, Category category) {
 		super();
 		this.itemName = itemName;
 		this.description = description;
 		this.price = price;
 		this.category = category;
-		this.seller = seller;
 	}
 
 	public Long getId() {
@@ -81,11 +81,11 @@ public class Item implements Serializable {
 		this.price = price;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
@@ -105,4 +105,19 @@ public class Item implements Serializable {
 		this.seller = seller;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public int getRemainingQuantity() {
+		if(!orders.isEmpty()) {
+			return quantity - orders.size();
+		} else {
+			return quantity;
+		}
+	}
 }

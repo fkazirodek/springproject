@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
+		http	
 			.authorizeRequests()
 				.anyRequest().permitAll()
 				.antMatchers("/profile").authenticated()
@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/")
 					.permitAll();
-				
+
 	}
 	
 }

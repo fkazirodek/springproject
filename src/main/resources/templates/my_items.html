@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Profile</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:include="fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel użytkownika</h3>
+					</div>
+					<a href="#" th:href="@{/profile}" class="list-group-item">Moj
+						Profil</a> <a href="#" class="list-group-item">Kupione przedmioty</a>
+					<a href="#" class="list-group-item">Sprzedane przedmioty</a> <a
+						href="#" th:href="@{/myitems}" class="list-group-item active">Wystawione
+						przedmioty</a> <a href="#" th:href="@{/additem}"
+						class="list-group-item">Wystaw nowy przedmiot</a>
+				</div>
+			</div>
+			<div class="col-md-8">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Twoje przedmioty wystawione na sprzedaż</h4>
+					</div>
+					<div class="panel-body">
+
+						<div class="box box-info">
+
+							<div class="box-body">
+							
+								<div class="row">
+									<div class="list-group">
+										<div class="list-group-item clearfix" th:each="item : ${items}">
+											<div class="profile-teaser-left">
+												<div class="profile-img">
+													<img src="" />
+												</div>
+											</div>
+											<div class="profile-teaser-main">
+												<h2 class="profile-name" th:text="${item.itemName}">Nazwa przedmiotu</h2>
+												<div class="profile-info">
+													<div class="info">
+														Cena: <span th:text="${item.price}"></span>
+													</div>
+													<div class="info">
+														Ilość wystawinych: <span th:text="${item.quantity}"></span>
+													</div>
+													<div class="info">
+														Pozostało: <span th:text="${item.getRemainingQuantity()}"></span>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										<!-- item -->
+									</div>
+								</div>
+
+								<!-- /.box-body -->
+							</div>
+							<!-- /.box -->
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

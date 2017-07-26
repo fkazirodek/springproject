@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Profile</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:include="fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel użytkownika</h3>
+					</div>
+					<a href="#" th:href="@{/profile}" class="list-group-item">Moj Profil</a> 
+					<a href="#" class="list-group-item">Kupione przedmioty</a>
+					<a href="#" class="list-group-item">Sprzedane przedmioty</a> 
+					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a> 
+					<a href="#" th:href="@{/additem}" class="list-group-item active">Wystaw nowy przedmiot</a>
+				</div>
+			</div>
+			<div class="col-md-8">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Wystaw przedmiot na sprzedaż</h4>
+					</div>
+					<div class="panel-body">
+
+						<div class="box box-info">
+
+							<div class="box-body">
+							
+								<form class="form-horizontal" action="additem" th:action="@{/additem}" method="post">
+									<fieldset>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="itemName">Nazwa
+												przedmiotu</label>
+											<div class="col-md-4">
+												<input id="itemName" name="itemName"
+													class="form-control input-md" type="text" th:field="${item.itemName}"/>
+
+											</div>
+										</div>
+
+										<!-- Textarea -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="description">Opis</label>
+											<div class="col-md-4">
+												<textarea class="form-control" id="description"
+													name="description" th:field="${item.description}">Opis przedmiotu</textarea>
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="price">Cena</label>
+											<div class="col-md-4">
+												<input id="price" name="price" 
+													class="form-control input-md" type="text" th:field="${item.price}"/>
+
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="quantity">Ilość</label>
+											<div class="col-md-4">
+												<input id="quantity" name="quantity"
+													class="form-control input-md" type="text" th:field="${item.quantity}"/>
+
+											</div>
+										</div>
+
+										<!-- Select Basic -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="category">Kategoria</label>
+											<div class="col-md-4">
+												<select name="category"
+													class="form-control">
+													<option th:each="category : ${categories}"
+															th:value="${category.id}"
+															th:text="${category.categoryName}">kategoria</option>
+												</select>
+											</div>
+										</div>
+										<!-- Button -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="add"></label>
+											<div class="col-md-4">
+												<button id="add" name="add" class="btn btn-primary">Wystaw
+													przedmiot</button>
+											</div>
+										</div>
+
+									</fieldset>
+								</form>
+
+								<!-- /.box-body -->
+							</div>
+							<!-- /.box -->
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>
