@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:include = "fragments :: navbar"></div>
+  
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+    		<div class="invoice-title">
+    			<h2>Faktura</h2><h3 class="pull-right">Zamówienie # 12345</h3>
+    		</div>
+    		<hr>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    				<strong>Faktura na:</strong><br/>
+    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p>Jane Smith<br/>
+    					<p th:text="|${session.address.city} ${session.address.zipCode}|"></p>1234 Main<br/>
+    					<p th:text="${session.address.street}"></p>
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+        			<strong>Adres wysyłki:</strong><br/>
+    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p>Jane Smith<br/>
+    					<p th:text="|${session.address.city} ${session.address.zipCode}|"></p>1234 Main<br/>
+    					<p th:text="${session.address.street}"></p>
+    				</address>
+    			</div>
+    		</div>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    					<strong>Metoda płatności:</strong><br>
+    					<select id="payment" name="payment" class="form-control">
+					      <option value="1">Płatność przy odbiorze</option>
+					      <option value="2">Płatność kartą (Mastercard, Visa)</option>
+					    </select>
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+    					<strong>Data zamówienia:</strong><br>
+    					March 7, 2014<br><br>
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">
+    			<div class="panel-heading">
+    				<h3 class="panel-title"><strong>Podsumowanie zamówienia</strong></h3>
+    			</div>
+    			<div class="panel-body">
+    				<div class="table-responsive">
+    					<table class="table table-condensed">
+    						<thead>
+                                <tr>
+        							<td><strong>Item</strong></td>
+        							<td class="text-center"><strong>Cena</strong></td>
+        							<td class="text-center"><strong>Ilość</strong></td>
+        							<td class="text-right"><strong>Do zapłaty</strong></td>
+                                </tr>
+    						</thead>
+    						<tbody>
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                <tr th:each="item : ${session.cart.itemsInCart}">
+            						<td th:text="${item.itemName}">BS-1000</td>
+    								<td class="text-center" th:text="${item.price}">$600.00</td>
+    								<td class="text-center">1</td>
+    								<td class="text-right">$600.00</td>
+    							</tr>
+    							<tr>
+    								<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+    								<td class="thick-line text-center"><strong>Suma</strong></td>
+    								<td class="thick-line text-right">$670.99</td>
+    							</tr>
+    							<tr>
+    								<td class="no-line"></td>
+    								<td class="no-line"></td>
+    								<td class="no-line text-center"><strong>Koszt dostawy</strong></td>
+    								<td class="no-line text-right">$15</td>
+    							</tr>
+    							<tr>
+    								<td class="no-line"></td>
+    								<td class="no-line"></td>
+    								<td class="no-line text-center"><strong>Do zapłaty</strong></td>
+    								<td class="no-line text-right">$685.99</td>
+    							</tr>
+    						</tbody>
+    					</table>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+    
+</body>
+</html>

@@ -40,10 +40,9 @@ public class ShoppingCart implements Serializable {
 	}
 
 	public void calculateAmount() {
-		if (itemsInCart != null) {
-			BigDecimal sum = BigDecimal.TEN;
-			itemsInCart.forEach((i) -> sum.add(i.getPrice()));
-			this.amount = sum;
+		if (!itemsInCart.isEmpty()) {
+			BigDecimal sum = BigDecimal.ZERO;
+			itemsInCart.forEach((i) -> this.amount = sum.add(i.getPrice()));
 		} else {
 			this.amount = BigDecimal.ZERO;
 		}

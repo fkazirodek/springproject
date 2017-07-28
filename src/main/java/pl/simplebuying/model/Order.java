@@ -42,7 +42,6 @@ public class Order implements Serializable {
 	}
 
 	public Order(String orderDetails) {
-		super();
 		this.orderDetails = orderDetails;
 	}
 
@@ -59,10 +58,6 @@ public class Order implements Serializable {
 	}
 
 	public BigDecimal getAmountOfOrder() {
-		BigDecimal amountOfOrder = BigDecimal.ZERO;
-		if (!items.isEmpty()) {
-			items.forEach(i -> amountOfOrder.add(i.getPrice()));
-		}
 		return amountOfOrder;
 	}
 

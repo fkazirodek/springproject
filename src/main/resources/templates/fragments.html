@@ -28,17 +28,17 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Kategorie<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<h5>Elektornika</h5>
+								<li><b>Elektornika</b></li>
 								<li class="divider"></li>
 								<li><a href="#">Telefony i Akcesoria</a></li>
 								<li><a href="#">Telewizory</a></li>
 								<li><a href="#">Laptopy</a></li>
-								<h5>Motoryzacja</h5>
+								<li><b>Motoryzacja</b></li>
 								<li class="divider"></li>
 								<li><a href="#">Samochody osobowe</a></li>
 								<li><a href="#">Motocykle</a></li>
 								<li><a href="#">Akcesoria</a></li>
-								<h5>Moda i uroda</h5>
+								<li><b>Moda i uroda</b></li>
 								<li class="divider"></li>
 								<li><a href="#">Odzież</a></li>
 								<li><a href="#">Biżuteria i Zegarki</a></li>
@@ -63,6 +63,7 @@
 								<li><a href="#">Sprzedane</a></li>
 								<li><a href="#" th:href="@{/myitems}">Wystawione</a></li>
 								<li><a href="#">Aktualne licytacje</a></li>
+								<li><a href="#" th:href="@{/additem}">Wystaw na sprzedaż</a></li>
 								<li class="divider"></li>
 								<li>
 									<form method="post" th:action="@{/logout}">
@@ -90,7 +91,7 @@
 									<span class="item-right">
 											<form th:action="@{/cart/delete}" method="get">
 					                        <input type="hidden" name="id" th:value="${item.id}"/>
-					                        <p><input type="submit" value="X" /></p>
+					                        <p><input class="btn btn-xs btn-danger pull-right" type="submit" value="X" /></p>
 					                        </form>
 									</span>
 									</span>
@@ -99,7 +100,7 @@
 								<li class="divider"></li>
 								<li><a class="text-center" th:text="${session.cart.getAmount()}"></a></li>
 								<li class="divider"></li>
-								<li><a class="text-center" th:href="@{/shoppingcart/summary}">Przejdz do podsumowania</a></li>
+								<li><a class="text-center" th:href="@{/shoppingcart}">Przejdz do karty zakupów</a></li>
 							</ul>
 						</li>
 					</ul>

@@ -30,7 +30,7 @@ public class CartController {
 		return "redirect:" + header;
 	}
 	
-	@GetMapping("/shoppingcart/summary")
+	@GetMapping("/shoppingcart")
 	public String goToSummary() {
 		return "shopping_cart";
 	}

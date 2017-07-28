@@ -18,16 +18,18 @@ public class ShoppingCartService {
 		this.itemService = itemService;
 	}
 
-	public void addItemToCart(String id) {
-		Long id_L = Long.decode(id);
-		Item itemById = itemService.findItemByID(id_L);
+	public void addItemToCart(String itemId) {
+		Long id = Long.decode(itemId);
+		Item itemById = itemService.findItemByID(id);
 		cart.getItemsInCart().add(itemById);
 		cart.calculateAmount();
 	}
 
-	public void deleteItemFromCart(String id) {
-		Long id_L = Long.decode(id);
-		cart.getItemsInCart().removeIf(i -> i.getId().equals(id_L));
+	public void deleteItemFromCart(String itemId) {
+		Long id = Long.decode(itemId);
+		cart.getItemsInCart().removeIf(i -> i.getId().equals(id));
+		cart.calculateAmount();
+		
 	}
 
 }

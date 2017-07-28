@@ -1,9 +1,6 @@
 package pl.simplebuying.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +25,7 @@ public class ProfileController {
 	}
 
 	@GetMapping
-	public String getAuthUser(Model model, Authentication auth, HttpSession session) {
-		User user = userService.findByUserName(auth.getName());
-		session.setAttribute("user", user);
-		session.setAttribute("address", user.getAddress());
+	public String profile() {
 		return "profile";
 	}
 
