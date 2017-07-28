@@ -34,7 +34,7 @@ public class ItemController {
 	}
 	
 	@PostMapping("/additem")
-	public String saveItem(@ModelAttribute Item item, @ModelAttribute Category category, @SessionAttribute User user) {
+	public String saveItem(@ModelAttribute Item item, @ModelAttribute Category category, @SessionAttribute User user, Model model) {
 		itemService.saveItem(item, category, user);
 		return "redirect:/";
 	}

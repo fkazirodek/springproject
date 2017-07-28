@@ -31,6 +31,11 @@ public class ItemService {
 		return items;
 	}
 	
+	public Item findItemByID(Long id) {
+		Item item = itemRepository.findOne(id);
+		return item;
+	}
+
 	public void saveItem(Item item, Category category, User seller) {
 		item.setCategory(category);
 		item.setSeller(seller);

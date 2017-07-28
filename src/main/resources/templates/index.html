@@ -5,7 +5,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -58,8 +58,12 @@
                         <h3 th:text="${item.itemName}">Nazwa przedmiotu</h3>
                         <p th:text="${item.description}">Opis</p>
                         <p th:text="|Cena: ${item.price}|"></p>
+                        <form th:action="@{/cart/add}" method="get">
+                        <input type="hidden" name="id" th:value="${item.id}"/>
+                        <p><input class="btn btn-primary" type="submit" value="Dodaj do koszyka" /></p>
+                        </form>
                         <p>
-                            <a href="#" class="btn btn-primary">Dodaj do koszyka</a> <a href="#" class="btn btn-default">Więcej informacji</a>
+                           <a href="#" class="btn btn-default">Więcej informacji</a>
                         </p>
                     </div>
                 </div>
