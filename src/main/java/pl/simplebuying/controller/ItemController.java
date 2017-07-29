@@ -2,9 +2,12 @@ package pl.simplebuying.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +35,17 @@ public class ItemController {
 		model.addAttribute("categories", categories);
 		return "add_item";
 	}
-	
-	@PostMapping("/additem")
-	public String saveItem(@ModelAttribute Item item, @ModelAttribute Category category, @SessionAttribute User user, Model model) {
-		itemService.saveItem(item, category, user);
-		return "redirect:/";
-	}
 
+	@PostMapping("/additem")
+	public String saveItem(@Valid @ModelAttribute Item item, BindingResult result, @ModelAttribute Category category, @SessionAttribute User user,
+			Model model) {
+		if (result.hasErrors()) {
+			return "add_item";
+		} else {
+			itemService.saveItem(item, category, user);
+			return "redirect:/";
+		}
+	}
 
 	@GetMapping("/myitems")
 	public String getMyItems(Model model, @SessionAttribute User user) {

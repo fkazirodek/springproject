@@ -19,39 +19,36 @@
     		<div class="invoice-title">
     			<h2>Faktura</h2><h3 class="pull-right">Zamówienie # 12345</h3>
     		</div>
-    		<hr>
+    		<hr/>
     		<div class="row">
     			<div class="col-xs-6">
     				<address>
     				<strong>Faktura na:</strong><br/>
-    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p>Jane Smith<br/>
-    					<p th:text="|${session.address.city} ${session.address.zipCode}|"></p>1234 Main<br/>
-    					<p th:text="${session.address.street}"></p>
+    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p><br/>
+    					<p th:text="|${session.user.address.city} ${session.user.address.zipCode}|"></p><br/>
+    					<p th:text="${session.user.address.street}"></p>
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
     				<address>
         			<strong>Adres wysyłki:</strong><br/>
-    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p>Jane Smith<br/>
-    					<p th:text="|${session.address.city} ${session.address.zipCode}|"></p>1234 Main<br/>
-    					<p th:text="${session.address.street}"></p>
+    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p><br/>
+    					<p th:text="|${session.user.address.city} ${session.user.address.zipCode}|"></p><br/>
+    					<p th:text="${session.user.address.street}"></p>
     				</address>
     			</div>
     		</div>
     		<div class="row">
     			<div class="col-xs-6">
     				<address>
-    					<strong>Metoda płatności:</strong><br>
-    					<select id="payment" name="payment" class="form-control">
-					      <option value="1">Płatność przy odbiorze</option>
-					      <option value="2">Płatność kartą (Mastercard, Visa)</option>
-					    </select>
+    					<strong>Metoda płatności:</strong><br/>
+    					<p></p>
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
     				<address>
-    					<strong>Data zamówienia:</strong><br>
-    					March 7, 2014<br><br>
+    					<strong>Data zamówienia:</strong><br/>
+    					<p th:text="${date}"></p><br/>
     				</address>
     			</div>
     		</div>
@@ -69,7 +66,7 @@
     					<table class="table table-condensed">
     						<thead>
                                 <tr>
-        							<td><strong>Item</strong></td>
+        							<td><strong>Przedmiot</strong></td>
         							<td class="text-center"><strong>Cena</strong></td>
         							<td class="text-center"><strong>Ilość</strong></td>
         							<td class="text-right"><strong>Do zapłaty</strong></td>
@@ -78,9 +75,9 @@
     						<tbody>
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
                                 <tr th:each="item : ${session.cart.itemsInCart}">
-            						<td th:text="${item.itemName}">BS-1000</td>
-    								<td class="text-center" th:text="${item.price}">$600.00</td>
-    								<td class="text-center">1</td>
+            						<td th:text="${item.itemName}">Name</td>
+    								<td class="text-center" th:text="${item.price}">Price</td>
+    								<td class="text-center">Quantity</td>
     								<td class="text-right">$600.00</td>
     							</tr>
     							<tr>

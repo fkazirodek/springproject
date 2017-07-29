@@ -53,8 +53,8 @@
 											<div class="col-md-4">
 												<input id="itemName" name="itemName"
 													class="form-control input-md" type="text" th:field="${item.itemName}"/>
-
 											</div>
+											<p th:errors="${item.itemName}"></p>
 										</div>
 
 										<!-- Textarea -->
@@ -64,6 +64,7 @@
 												<textarea class="form-control" id="description"
 													name="description" th:field="${item.description}">Opis przedmiotu</textarea>
 											</div>
+											<p th:errors="${item.description}"></p>
 										</div>
 
 										<!-- Text input-->
@@ -72,8 +73,8 @@
 											<div class="col-md-4">
 												<input id="price" name="price" 
 													class="form-control input-md" type="text" th:field="${item.price}"/>
-
 											</div>
+											<p th:errors="${item.price}"></p>
 										</div>
 
 										<!-- Text input-->
@@ -82,8 +83,8 @@
 											<div class="col-md-4">
 												<input id="quantity" name="quantity"
 													class="form-control input-md" type="text" th:field="${item.quantity}"/>
-
 											</div>
+											<p th:errors="${item.quantity}"></p>
 										</div>
 
 										<!-- Select Basic -->

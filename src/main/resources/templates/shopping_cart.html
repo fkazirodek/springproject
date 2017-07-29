@@ -49,8 +49,8 @@
 							<form th:action="@{/cart/delete}" method="get">
 								<input type="hidden" name="id" th:value="${item.id}"/>
 								<input type="button" class="btn btn-link btn-xs"/>
-								<span class="glyphicon glyphicon-trash"> </span>
 							</form>
+							<span class="glyphicon glyphicon-trash"> </span>
 							</div>
 						</div>
 					</div>
@@ -70,12 +70,18 @@
 				</div>
 				<div class="panel-footer">
 					<div class="row text-center">
-						<div class="col-xs-9">
+						<div class="col-xs-5">
+							<select name="payment" class="form-control">
+								<option >
+								</option>
+								</select>
+						</div>
+						<div class="col-xs-4">
 							<h4 class="text-right">Suma zakupów <strong th:text="${session.cart.amount}">$10</strong></h4>
 						</div>
 						<div class="col-xs-3">
 							<a href="#" th:href="@{/summary}"><button type="button" class="btn btn-success btn-block">
-								Przejdz podsumowania i płatności
+								Przejdz podsumowania
 							</button></a>
 						</div>
 					</div>
@@ -83,6 +89,7 @@
 			</div>
 		</div>
 	</div>
+	<h4 th:text="${message}"></h4>
 </div>
     
 </body>

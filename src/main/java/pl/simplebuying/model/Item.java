@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+
 @Entity
 public class Item implements Serializable {
 
@@ -25,13 +26,14 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item")
 	private Long id;
+	@NotEmpty(message = "{pl.simplebuying.model.Item.itemName.NotEmpty}")
 	@Column(name = "item_name", nullable = false)
 	private String itemName;
-	@NotEmpty
+	@NotEmpty(message = "{pl.simplebuying.model.Item.description.NotEmpty}")
 	private String description;
-	@NotNull
+	@NotNull(message = "{pl.simplebuying.model.Item.price.NotNull}")
 	private BigDecimal price;
-	@NotNull
+	@NotNull(message = "{pl.simplebuying.model.Item.quantity.NotNull}")
 	private Integer quantity;
 	@NotNull
 	@ManyToOne

@@ -75,20 +75,20 @@
 									<h4 style="color: #00b1b1;">Adres:</h4>
 								</div>
 								<div class="col-sm-5 col-xs-6 tital">Miasto:</div>
-								<div class="col-sm-7" th:if="${session.address} != null"
-									th:text="${session.address.city}">nie podano</div>
+								<div class="col-sm-7" th:if="${session.user.address} != null"
+									th:text="${session.user.address.city}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Ulica:</div>
-								<div class="col-sm-7" th:if="${session.address} != null"
-									th:text="${session.address.street}">nie podano</div>
+								<div class="col-sm-7" th:if="${session.user.address} != null"
+									th:text="${session.user.address.street}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Kod pocztowy:</div>
-								<div class="col-sm-7" th:if="${session.address} != null"
-									th:text="${session.address.zipCode}">nie podano</div>
+								<div class="col-sm-7" th:if="${session.user.address} != null"
+									th:text="${session.user.address.zipCode}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 								<!-- /.box-body -->
