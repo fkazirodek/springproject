@@ -21,15 +21,18 @@ public class ShoppingCartService {
 	public void addItemToCart(String itemId) {
 		Long id = Long.decode(itemId);
 		Item itemById = itemService.findItemByID(id);
-		cart.getItemsInCart().add(itemById);
-		cart.calculateAmount();
+		Integer quantity = itemById.getQuantity();
+		if (quantity > 0) {
+			cart.getItemsInCart().add(itemById);
+			cart.calculateAmount();
+		}
 	}
 
 	public void deleteItemFromCart(String itemId) {
 		Long id = Long.decode(itemId);
 		cart.getItemsInCart().removeIf(i -> i.getId().equals(id));
 		cart.calculateAmount();
-		
+
 	}
 
 }

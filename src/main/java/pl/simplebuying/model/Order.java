@@ -2,7 +2,6 @@ package pl.simplebuying.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_order")
+@Table(name = "orders")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,7 +30,7 @@ public class Order implements Serializable {
 	@Column(name = "amount")
 	private BigDecimal amountOfOrder;
 	@Column(name = "order_date")
-	private LocalDate orderDate;
+	private String orderDate;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -68,11 +67,11 @@ public class Order implements Serializable {
 		this.amountOfOrder = amountOfOrder;
 	}
 	
-	public LocalDate getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(LocalDate orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 

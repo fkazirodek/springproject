@@ -25,9 +25,9 @@
 						<h3 class="panel-title">Panel użytkownika</h3>
 					</div>
 					<a href="#" th:href="@{/profile}" class="list-group-item">Moj Profil</a> 
-					<a href="#" th:href="@{/boughtitems}" class="list-group-item">Kupione przedmioty</a>
+					<a href="#" th:href="@{/boughtitems}" class="list-group-item active">Kupione przedmioty</a>
 					<a href="#" th:href="@{/sellitems}" class="list-group-item">Sprzedane przedmioty</a> 
-					<a href="#" th:href="@{/myitems}" class="list-group-item active">Wystawione przedmioty</a> 
+					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a> 
 					<a href="#" th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4>Twoje przedmioty wystawione na sprzedaż</h4>
+						<h4>Kupione przedmioty</h4>
 					</div>
 					<div class="panel-body">
 
@@ -58,9 +58,8 @@
 														Cena: <span th:text="${item.price}"></span>
 													</div>
 													<div class="info">
-														Pozostało: <span th:text="${item.quantity}"></span>
+														Ilość kupionych: <span></span>
 													</div>
-
 
 												</div>
 											</div>

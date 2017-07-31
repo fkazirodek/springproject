@@ -30,7 +30,17 @@ public class OrderController {
 			redirectAttribute.addFlashAttribute("message", "Musisz uzupełnic swój adres w celu złożenia zamówienia");
 			return "redirect:/shoppingcart";
 		}
-
 	}
 
+	@GetMapping("/summary/confirm")
+	public String confirmationOfPurchase(@SessionAttribute User user, RedirectAttributes redirectAttribute) {
+		if(orderService.saveOrder(user)) {
+			return "redirect:/";
+		} else {
+			redirectAttribute.addFlashAttribute("message", "Przedmiot który chcesz kupić jest już niedostępny lub został wyprzedany");
+			return "redirect:/shoppingcart";
+		}
+		
+	}
+	
 }

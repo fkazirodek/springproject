@@ -18,8 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http	
 			.authorizeRequests()
-				.anyRequest().permitAll()
-				.antMatchers("/profile").authenticated()
+				.antMatchers("/", "/register", "/cart/add", "/cart/delete", "/shoppingcart").permitAll()
+				.anyRequest().authenticated()
 			.and()
 				.formLogin()
 					.loginPage("/login")

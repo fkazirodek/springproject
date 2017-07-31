@@ -1,4 +1,4 @@
-package pl.simplebuying.controller;
+	package pl.simplebuying.controller;
 
 import java.util.List;
 
@@ -53,4 +53,19 @@ public class ItemController {
 		model.addAttribute("items", items);
 		return "my_items";
 	}
+	
+	@GetMapping("/boughtitems")
+	public String getBoughtItems(@SessionAttribute User user, Model model) {
+		List<Item> boughtItemsByUser = itemService.getBoughtItemsByUser(user);
+		model.addAttribute("items", boughtItemsByUser);
+		return "bought_items";
+	}
+	
+	@GetMapping("/sellitems") 
+	public String sellItems(@SessionAttribute User user, Model model) {
+		List<Item> sellItems = itemService.getSellItems(user);
+		model.addAttribute("items", sellItems);
+		return "sell_items";
+	}
+	
 }

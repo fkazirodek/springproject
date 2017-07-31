@@ -115,11 +115,4 @@ public class Item implements Serializable {
 		this.orders = orders;
 	}
 
-	public int getRemainingQuantity() {
-		if(!orders.isEmpty()) {
-			return quantity - orders.size();
-		} else {
-			return quantity;
-		}
-	}
 }
