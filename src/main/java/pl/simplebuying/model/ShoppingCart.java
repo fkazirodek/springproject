@@ -15,14 +15,15 @@ import org.springframework.web.context.WebApplicationContext;
 public class ShoppingCart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private List<Item> itemsInCart;
 	private BigDecimal amount;
 
 	public ShoppingCart() {
 		itemsInCart = new ArrayList<>();
+		this.amount = BigDecimal.ZERO;
 	}
-	
+
 	public List<Item> getItemsInCart() {
 		return itemsInCart;
 	}
@@ -41,8 +42,8 @@ public class ShoppingCart implements Serializable {
 
 	public void calculateAmount() {
 		if (!itemsInCart.isEmpty()) {
-			BigDecimal sum = BigDecimal.ZERO;
-			itemsInCart.forEach((i) -> this.amount = sum.add(i.getPrice()));
+			amount = BigDecimal.ZERO;
+			itemsInCart.forEach((i) -> amount = amount.add(i.getPrice()));
 		} else {
 			this.amount = BigDecimal.ZERO;
 		}

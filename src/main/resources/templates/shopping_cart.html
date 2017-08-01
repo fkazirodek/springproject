@@ -43,13 +43,16 @@
 								<h6><strong th:text="${item.price}">$10<span class="text-muted">x</span></strong></h6>
 							</div>
 							<div class="col-xs-4">
-								<input type="text" class="form-control input-sm" value="1"/>
+							<form th:action="@{/shoppingcart/refresh}" method="get">
+								<input type="number" name="quantity" class="form-control input-sm" value=""/>
+								<input type="hidden" name="id" th:value="${item.id}"/>
+								<p><input type="submit" class="btn btn-success pull-right" value="Aktualizuj"/></p>
+							</form>
 							</div>
 							<div class="col-xs-2">
 							<form th:action="@{/cart/delete}" method="get">
 								<input type="hidden" name="id" th:value="${item.id}"/>
-								<p><input type="submit" class="btn btn-link btn-xs" value=""/>
-								<span class="glyphicon glyphicon-trash"> </span></p>
+								<p><input type="submit" class="btn btn-xs btn-danger pull-right" value="Usuń"/></p>
 							</form>
 							
 							</div>
@@ -70,22 +73,34 @@
 					</div>
 				</div>
 				<div class="panel-footer">
-					<div class="row text-center">
-						<div class="col-xs-5">
-							<select name="payment" class="form-control">
-								<option >
-								</option>
-								</select>
+					<form th:action="@{/summary}" method="get" th:object="${order}">
+						<div class="row text-center">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<select name="payment" class="form-control">
+										<option >
+										</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label" for="textarea">Szczegóły zamówienia</label>
+			                        <div class="col-md-12">                     
+			                            <textarea class="form-control" id="textarea" name="orderDetails" th:field="*{orderDetails}"></textarea>
+			                        </div>
+		                        </div>
+							</div>
+							<div class="col-xs-3">
+								<h4 class="text-right">Suma zakupów <strong th:text="${session.cart.amount}">$10</strong></h4>
+							</div>
+							<div class="col-xs-3">
+								<div class="form-group">
+									<button type="submit" class="btn btn-success btn-block" value="Przejdz do podsumowania">
+										
+									</button>
+								</div>
+							</div>
 						</div>
-						<div class="col-xs-4">
-							<h4 class="text-right">Suma zakupów <strong th:text="${session.cart.amount}">$10</strong></h4>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" th:href="@{/summary}"><button type="button" class="btn btn-success btn-block">
-								Przejdz podsumowania
-							</button></a>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>

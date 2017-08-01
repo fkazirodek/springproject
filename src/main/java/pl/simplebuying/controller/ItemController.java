@@ -49,8 +49,8 @@ public class ItemController {
 
 	@GetMapping("/myitems")
 	public String getMyItems(Model model, @SessionAttribute User user) {
-		List<Item> items = itemService.getItemByUserId(user);
-		model.addAttribute("items", items);
+		List<Item> userItems = itemService.getUserItems(user);
+		model.addAttribute("items", userItems);
 		return "my_items";
 	}
 	

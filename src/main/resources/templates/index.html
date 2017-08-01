@@ -58,8 +58,9 @@
                         <h3 th:text="${item.itemName}">Nazwa przedmiotu</h3>
                         <p th:text="${item.description}">Opis</p>
                         <p th:text="|Cena: ${item.price}|"></p>
-                        <p th:text="|Dostępna ilość: ${item.quantity}|"></p>
-                        <form th:action="@{/cart/add}" method="get">
+                        <p th:if="${item.quantity} > 0" th:text="|Dostępna ilość: ${item.quantity}|"></p>
+                        <p th:if="${item.quantity} == 0" th:text="Wyprzedano"></p>
+                        <form th:action="@{/cart/add}" method="post">
                         <input type="hidden" name="id" th:value="${item.id}"/>
                         <p><input class="btn btn-primary" type="submit" value="Dodaj do koszyka" /></p>
                         </form>

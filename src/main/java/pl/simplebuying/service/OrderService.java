@@ -1,5 +1,6 @@
 package pl.simplebuying.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -43,9 +44,9 @@ public class OrderService {
 	public boolean saveOrder(User buyer) {
 		List<Item> itemsInCart = shoppingCart.getItemsInCart();
 		Order order = createNewOrder(buyer, itemsInCart);
-		if (checkItem(itemsInCart, order)) {
+		if (checkItemQuantity(itemsInCart, order)) {
 			orderRepository.save(order);
-			itemsInCart.clear();
+			clearShoppingCart(itemsInCart);
 			return true;
 		} else {
 			return false;
@@ -62,7 +63,7 @@ public class OrderService {
 		return order;
 	}
 
-	private boolean checkItem(List<Item> items, Order order) {
+	private boolean checkItemQuantity(List<Item> items, Order order) {
 		boolean condition = false;
 		for (Item item : items) {
 			Item itemDB = itemRepository.findOne(item.getId());
@@ -76,6 +77,11 @@ public class OrderService {
 			}
 		}
 		return condition;
+	}
+
+	private void clearShoppingCart(List<Item> itemsInCart) {
+		itemsInCart.clear();
+		shoppingCart.setAmount(BigDecimal.ZERO);
 	}
 
 }

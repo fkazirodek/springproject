@@ -23,10 +23,10 @@ public class ShoppingCartService {
 		Item itemById = itemService.findItemByID(id);
 		Integer quantity = itemById.getQuantity();
 		if (quantity > 0) {
-			cart.getItemsInCart().add(itemById);
-			cart.calculateAmount();
+				cart.getItemsInCart().add(itemById);
+				cart.calculateAmount();
+			}
 		}
-	}
 
 	public void deleteItemFromCart(String itemId) {
 		Long id = Long.decode(itemId);

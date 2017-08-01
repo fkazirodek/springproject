@@ -59,7 +59,7 @@ public class ItemService {
 		return categories;
 	}
 	
-	public List<Item> getItemByUserId(User user) {
+	public List<Item> getUserItems(User user) {
 		List<Item> userItems = itemRepository.findBySeller_id(user.getId());
 		return userItems;
 	}
@@ -75,7 +75,7 @@ public class ItemService {
 	}
 	
 	public List<Item> getSellItems(User user) {
-		List<Item> items = getItemByUserId(user);
+		List<Item> items = getUserItems(user);
 		List<Item> sellItems = new ArrayList<>();
 		for (Item item : items) {
 			List<Order> orders = item.getOrders();

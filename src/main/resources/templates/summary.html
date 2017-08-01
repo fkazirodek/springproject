@@ -76,15 +76,15 @@
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
                                 <tr th:each="item : ${session.cart.itemsInCart}">
             						<td th:text="${item.itemName}">Name</td>
-    								<td class="text-center" th:text="${item.price}">Price</td>
-    								<td class="text-center">Ilosc</td>
-    								<td class="text-right">$600.00</td>
+    								<td class="text-center" th:text="${item.price}">Cena</td>
+    								<td class="text-center">1</td>
+    								<td class="text-right" th:text="${item.price}">$600.00</td>
     							</tr>
     							<tr>
     								<td class="thick-line"></td>
     								<td class="thick-line"></td>
     								<td class="thick-line text-center"><strong>Suma</strong></td>
-    								<td class="thick-line text-right" th:text="session.cart.amount">$670.99</td>
+    								<td class="thick-line text-right" th:text="${session.cart.amount}">$670.99</td>
     							</tr>
     							<tr>
     								<td class="no-line"></td>
