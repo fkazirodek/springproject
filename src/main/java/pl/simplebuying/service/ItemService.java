@@ -79,7 +79,7 @@ public class ItemService {
 		List<Item> sellItems = new ArrayList<>();
 		for (Item item : items) {
 			List<Order> orders = item.getOrders();
-			if(orders != null) {
+			if(!orders.isEmpty() && item.getQuantity() > 0) {
 				sellItems.add(item);
 			}
 		}

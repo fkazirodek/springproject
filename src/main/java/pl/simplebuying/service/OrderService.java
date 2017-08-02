@@ -22,12 +22,17 @@ public class OrderService {
 	private ShoppingCart shoppingCart;
 	private OrderRepository orderRepository;
 	private ItemRepository itemRepository;
+	private Order order;
 
 	@Autowired
 	public OrderService(ShoppingCart shoppingCart, OrderRepository orderRepository, ItemRepository itemRepository) {
 		this.shoppingCart = shoppingCart;
 		this.orderRepository = orderRepository;
 		this.itemRepository = itemRepository;
+	}
+	
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	public boolean checkUserAddress(Address address) {
@@ -43,7 +48,7 @@ public class OrderService {
 
 	public boolean saveOrder(User buyer) {
 		List<Item> itemsInCart = shoppingCart.getItemsInCart();
-		Order order = createNewOrder(buyer, itemsInCart);
+		Order order = createOrder(buyer, itemsInCart);
 		if (checkItemQuantity(itemsInCart, order)) {
 			orderRepository.save(order);
 			clearShoppingCart(itemsInCart);
@@ -54,8 +59,7 @@ public class OrderService {
 
 	}
 
-	private Order createNewOrder(User buyer, List<Item> items) {
-		Order order = new Order();
+	private Order createOrder(User buyer, List<Item> items) {
 		order.setItems(items);
 		order.setUser(buyer);
 		order.setAmountOfOrder(shoppingCart.getAmount());

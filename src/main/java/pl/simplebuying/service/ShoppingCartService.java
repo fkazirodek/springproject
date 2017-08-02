@@ -1,5 +1,7 @@
 package pl.simplebuying.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class ShoppingCartService {
 		this.itemService = itemService;
 	}
 
+	public List<Item> getItemsInCart() {
+		return cart.getItemsInCart();
+	}
+	
 	public void addItemToCart(String itemId) {
 		Long id = Long.decode(itemId);
 		Item itemById = itemService.findItemByID(id);

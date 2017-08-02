@@ -43,11 +43,6 @@
 								<h6><strong th:text="${item.price}">$10<span class="text-muted">x</span></strong></h6>
 							</div>
 							<div class="col-xs-4">
-							<form th:action="@{/shoppingcart/refresh}" method="get">
-								<input type="number" name="quantity" class="form-control input-sm" value=""/>
-								<input type="hidden" name="id" th:value="${item.id}"/>
-								<p><input type="submit" class="btn btn-success pull-right" value="Aktualizuj"/></p>
-							</form>
 							</div>
 							<div class="col-xs-2">
 							<form th:action="@{/cart/delete}" method="get">
@@ -94,8 +89,8 @@
 							</div>
 							<div class="col-xs-3">
 								<div class="form-group">
-									<button type="submit" class="btn btn-success btn-block" value="Przejdz do podsumowania">
-										
+									<button type="submit" class="btn btn-success btn-block">
+									Przejdz do podsumowania							
 									</button>
 								</div>
 							</div>

@@ -13,30 +13,36 @@ import pl.simplebuying.service.ShoppingCartService;
 
 @Controller
 public class CartController {
-	
+
 	private ShoppingCartService shoppingCartService;
 
 	@Autowired
 	public CartController(ShoppingCartService shoppingCartService) {
 		this.shoppingCartService = shoppingCartService;
 	}
-	
+
 	@PostMapping("/cart/add")
 	public String addItem(@RequestParam String id, @RequestHeader(value = "referer", required = false) String header) {
 		shoppingCartService.addItemToCart(id);
 		return "redirect:" + header;
 	}
-	
+
 	@GetMapping("/cart/delete")
-	public String deleteItem(@RequestParam String id, @RequestHeader(value = "referer", required = false) String header) {
+	public String deleteItem(@RequestParam String id,
+			@RequestHeader(value = "referer", required = false) String header) {
 		shoppingCartService.deleteItemFromCart(id);
 		return "redirect:" + header;
 	}
-	
+
 	@GetMapping("/shoppingcart")
-	public String goToSummary(Model model) {
-		model.addAttribute("order", new Order());
-		return "shopping_cart";
+	public String shoppingCart(Model model) {
+		if (shoppingCartService.getItemsInCart().isEmpty()) {
+			model.addAttribute("message", "Twój koszyk z zakupami jest pusty");
+			return "index";
+		} else {
+			model.addAttribute("order", new Order());
+			return "shopping_cart";
+		}
 	}
 
 }
