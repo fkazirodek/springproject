@@ -37,6 +37,7 @@ public class Item implements Serializable {
 	private Integer quantity;
 	@NotNull
 	@ManyToOne
+	@JoinColumn(name="category_id")
 	private Category category;
 	@ManyToOne
 	@JoinColumn(name= "seller_id", nullable = false)

@@ -1,14 +1,11 @@
 package pl.simplebuying.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import pl.simplebuying.model.Item;
 import pl.simplebuying.service.SearchService;
 
 @Controller
@@ -23,9 +20,9 @@ public class SearchController {
 
 	@GetMapping
 	public String searchItem(@RequestParam String item, Model model) {
-		List<Item> itemsByName = searchService.searchByItemName(item);
-		model.addAttribute("items", itemsByName);
-		return "index";
+		model.addAttribute("items", searchService.searchByItemName(item));
+		model.addAttribute("searchName", item);
+		return "items_list";
 	}
 	
 }

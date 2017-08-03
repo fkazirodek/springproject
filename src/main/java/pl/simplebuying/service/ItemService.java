@@ -22,23 +22,24 @@ public class ItemService {
 	private ItemRepository itemRepository;
 	private CategoryRepository categoryRepository;
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	public ItemService(ItemRepository itemRepository, CategoryRepository categoryRepository, OrderRepository orderRepository) {
 		this.itemRepository = itemRepository;
 		this.categoryRepository = categoryRepository;
 		this.orderRepository = orderRepository;
 	}
-	
-	
+
 	public List<Item> getAllItems() {
-		List<Item> items = itemRepository.findAll();
-		return items;
+		return itemRepository.findAll();
 	}
 	
 	public Item findItemByID(Long id) {
-		Item item = itemRepository.findOne(id);
-		return item;
+		return itemRepository.findOne(id);
+	}
+
+	public List<Item> getItemsByCategory(Long id) {
+		return itemRepository.findByCategory_id(id);
 	}
 
 	public void saveItem(Item item, Category category, User seller) {
@@ -52,18 +53,16 @@ public class ItemService {
 		Page<Item> itemsByPage = itemRepository.findAll(new PageRequest(page, 10));
 		List<Item> items = itemsByPage.getContent();
 		return items;
-	}	
-	
+	}
+
 	public List<Category> getAllCategories() {
-		List<Category> categories = categoryRepository.findAll();
-		return categories;
+		return categoryRepository.findAll();
 	}
-	
+
 	public List<Item> getUserItems(User user) {
-		List<Item> userItems = itemRepository.findBySeller_id(user.getId());
-		return userItems;
+		return itemRepository.findBySeller_id(user.getId());
 	}
-	
+
 	public List<Item> getBoughtItemsByUser(User user) {
 		List<Order> orders = orderRepository.findByUser_id(user.getId());
 		List<Item> allItems = new ArrayList<>();
@@ -73,17 +72,17 @@ public class ItemService {
 		}
 		return allItems;
 	}
-	
+
 	public List<Item> getSellItems(User user) {
 		List<Item> items = getUserItems(user);
 		List<Item> sellItems = new ArrayList<>();
 		for (Item item : items) {
 			List<Order> orders = item.getOrders();
-			if(!orders.isEmpty() && item.getQuantity() > 0) {
+			if (!orders.isEmpty()) {
 				sellItems.add(item);
 			}
 		}
 		return sellItems;
 	}
-	
+
 }

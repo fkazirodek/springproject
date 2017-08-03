@@ -18,12 +18,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http	
 			.authorizeRequests()
-				.antMatchers("/", "/register", "/cart/add", "/cart/delete", "/shoppingcart", "/search").permitAll()
+				.antMatchers("/", "/register", "/cart/add", "/cart/delete", "/shoppingcart", "/search", "/items_list").permitAll()
 				.anyRequest().authenticated()
 			.and()
 				.formLogin()
 					.loginPage("/login")
 					.failureUrl("/loginerror")
+					.defaultSuccessUrl("/")
 					.permitAll()
 			.and()
 				.logout()

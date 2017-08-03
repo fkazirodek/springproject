@@ -51,7 +51,7 @@
 													<img src="" />
 												</div>
 											</div>
-											<div class="profile-teaser-main">
+											<div class="profile-teaser-main" th:if="${item.quantity > 0}">
 												<h2 class="profile-name" th:text="${item.itemName}">Nazwa przedmiotu</h2>
 												<div class="profile-info">
 													<div class="info">

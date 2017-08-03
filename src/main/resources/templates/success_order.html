@@ -1,0 +1,24 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:include = "fragments :: navbar"></div>
+  
+ <h3>Transakcja przebiegła pomyślnie. Na Twój adres email <b th:text="${session.user.email}"></b> została wysłana wiadomość z podsumowaniem zakupów </h3><br/>
+  
+<a href="#" th:href="@{/}" class="btn btn-primary btn-info"><span class="glyphicon glyphicon-chevron-left"></span>Przejdz do strony głównej</a>
+<a href="#" th:href="@{/boughtitems}" class="btn btn-primary btn-info">Zobacz kupine przedmioty <span class="glyphicon glyphicon-shopping-cart"></span></a>
+    
+</body>
+</html>

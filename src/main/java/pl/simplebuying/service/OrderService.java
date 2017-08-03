@@ -22,13 +22,16 @@ public class OrderService {
 	private ShoppingCart shoppingCart;
 	private OrderRepository orderRepository;
 	private ItemRepository itemRepository;
+	private EmailService emailService;
+
 	private Order order;
 
 	@Autowired
-	public OrderService(ShoppingCart shoppingCart, OrderRepository orderRepository, ItemRepository itemRepository) {
+	public OrderService(ShoppingCart shoppingCart, OrderRepository orderRepository, ItemRepository itemRepository, EmailService emailService) {
 		this.shoppingCart = shoppingCart;
 		this.orderRepository = orderRepository;
 		this.itemRepository = itemRepository;
+		this.emailService = emailService;
 	}
 	
 	public void setOrder(Order order) {
@@ -48,9 +51,10 @@ public class OrderService {
 
 	public boolean saveOrder(User buyer) {
 		List<Item> itemsInCart = shoppingCart.getItemsInCart();
-		Order order = createOrder(buyer, itemsInCart);
-		if (checkItemQuantity(itemsInCart, order)) {
+		createOrder(buyer, itemsInCart);
+		if (checkItemQuantity(itemsInCart)) {
 			orderRepository.save(order);
+			emailService.sendOrderEmailToBuyer(buyer, order);
 			clearShoppingCart(itemsInCart);
 			return true;
 		} else {
@@ -59,15 +63,14 @@ public class OrderService {
 
 	}
 
-	private Order createOrder(User buyer, List<Item> items) {
+	private void createOrder(User buyer, List<Item> items) {
 		order.setItems(items);
 		order.setUser(buyer);
 		order.setAmountOfOrder(shoppingCart.getAmount());
 		order.setOrderDate(getDateAsString());
-		return order;
 	}
 
-	private boolean checkItemQuantity(List<Item> items, Order order) {
+	private boolean checkItemQuantity(List<Item> items) {
 		boolean condition = false;
 		for (Item item : items) {
 			Item itemDB = itemRepository.findOne(item.getId());

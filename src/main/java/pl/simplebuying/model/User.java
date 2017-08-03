@@ -50,12 +50,14 @@ public class User implements Serializable {
 	private Address address;
 	@Column(name = "authorization", nullable = false)
 	private String role;
+	private boolean enabled;
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
 
 	public User() {
+		this.enabled = false;
 	}
 
 	public User(String firstName, String lastName, String username, String email, String password) {
@@ -125,6 +127,14 @@ public class User implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public List<Item> getUserItems() {

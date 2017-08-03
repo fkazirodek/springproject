@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	  <meta charset="utf-8"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <style type="text/css">
+	  	.wrapper{width:60%; margin:5% auto;height:100vh;  box-shadow:0 0 2px #aaa; font-family:Hind;}
+		.logo_header{width:100%; height:70px;background:#1CA8DD; padding:10px;}
+		.email_body{width:100%; padding:0 15px;}
+		.receipt_list{width:100%;}
+		.receipt_list .left_list{float:left; width:60%;}
+		.receipt_list .right_list{float:left; width:40%;}
+		 .left_list b,.right_list b{width:100%; float:left; margin:0 0 10px 0;}
+		 .left_list span,.right_list span{width:100%; float:left; margin:0 0 5px 0;}
+		 .right_list span{text-align:left; padding-left:15%;}
+		 .list_divider{width:100%; border-top:1px solid rgba(0,0,0,0.2);float:left;}
+		 .invoice_trans{width:100%;float:left; margin:5px 0;}
+		.invoice_left{float:left; width:60%;}
+		.invoice_right{float:left; width:40%;}
+	  </style>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="wrapper">
+				<div class="logo_header">
+					<a th:href="@{http://localhost:8080/SimpleBuying}">SimpleBuying</a>
+				</div>
+				<div class="email_banner"></div>
+				<div class="email_body">
+					<h1 class="text-center">Dziękujemy za złożenie zamówienia</h1>
+					<p >
+						W dniu <b th:text="${date}">1 lip 2017</b> zamówiłeś <span th:text="${numberOfItems}"></span> przedmioty od
+						użytkownik(a/ów) <span th:each="seller : ${sellers}"><b th:text="|${seller}, |">username</b></span>
+					</p>
+
+					<div class="receipt_list" th:each="item : ${items}">
+						<div class="left_list">
+							<b>Zamówione przedmoty</b> 
+							<span th:text="|${item.itemName} (${item.seller.username})|">Przedmiot 1</span> 
+
+						</div>
+						<div class="right_list">
+							<b>Cena</b> 
+							<span th:text="${item.price}">1000.90</span> 
+						</div>
+					</div>
+						<span class="list_divider"></span>
+						<div class="left_list">
+							<b>Łącznie do zapłaty</b>
+						</div>
+						<div class="right_list">
+							<span><b th:text="${amount}">1000.99</b></span>
+						</div>
+
+					<div class="invoice_trans">
+						<div class="invoice_left">
+							<p>Numer Zamóweinia</p>
+						</div>
+						<div class="invoice_right">
+							<p th:text="${orderId}">ARSH088752178698</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

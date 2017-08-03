@@ -1,4 +1,4 @@
- /* Remove the navbar's default margin-bottom and rounded borders */ 
+/* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar-default {
       margin-bottom: 15px;
       border-radius: 5px;

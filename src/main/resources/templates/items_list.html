@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Items List</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" href="/css/list.css" th:href="@{/css/list.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+</head>
+<body>
+
+	<div th:include="fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="well well-sm">
+			<strong th:if="${searchName != null}" th:text="|Wyniki wyszukiwania dla ${searchName}|">Category Title</strong>
+			<div class="btn-group">
+				<a href="#" id="list" class="btn btn-default btn-sm"><span
+					class="glyphicon glyphicon-th-list"> </span>List</a> <a href="#"
+					id="grid" class="btn btn-default btn-sm"><span
+					class="glyphicon glyphicon-th"></span>Grid</a>
+			</div>
+		</div>
+		<div id="products" class="row list-group">
+		
+			<div class="item  col-xs-4 col-lg-4" th:each="item : ${items}">
+				<div class="thumbnail">
+					<img class="group list-group-image"
+						src="http://placehold.it/400x250/000/fff" alt="" />
+					<div class="caption">
+						<h4 class="group inner list-group-item-heading" th:text="${item.itemName}">Product title</h4>
+						<p class="group inner list-group-item-text" th:text="${item.description}">Product
+							description...
+						</p>
+						<p th:if="${item.quantity} > 0" th:text="|Dostępna ilość: ${item.quantity}|"></p>
+                        <p th:if="${item.quantity} == 0" th:text="Wyprzedano"></p>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<p class="lead" th:text="${item.price}">$21.000</p>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<form th:action="@{/cart/add}" method="post">
+			                        <input type="hidden" name="id" th:value="${item.id}"/>
+			                        <input class="btn btn-primary" type="submit" value="Dodaj do koszyka" />
+		                        </form>
+		                           <a href="#" class="btn btn-default">Więcej informacji</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

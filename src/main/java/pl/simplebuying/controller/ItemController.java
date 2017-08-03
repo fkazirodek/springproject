@@ -1,6 +1,4 @@
-	package pl.simplebuying.controller;
-
-import java.util.List;
+package pl.simplebuying.controller;
 
 import javax.validation.Valid;
 
@@ -11,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import pl.simplebuying.model.Category;
@@ -30,15 +29,14 @@ public class ItemController {
 
 	@GetMapping("/additem")
 	public String addAttributes(Model model) {
-		List<Category> categories = itemService.getAllCategories();
 		model.addAttribute("item", new Item());
-		model.addAttribute("categories", categories);
+		model.addAttribute("categories", itemService.getAllCategories());
 		return "add_item";
 	}
 
 	@PostMapping("/additem")
-	public String saveItem(@Valid @ModelAttribute Item item, BindingResult result, @ModelAttribute Category category, @SessionAttribute User user,
-			Model model) {
+	public String saveItem(@Valid @ModelAttribute Item item, BindingResult result, @ModelAttribute Category category,
+			@SessionAttribute User user, Model model) {
 		if (result.hasErrors()) {
 			return "add_item";
 		} else {
@@ -49,23 +47,26 @@ public class ItemController {
 
 	@GetMapping("/myitems")
 	public String getMyItems(Model model, @SessionAttribute User user) {
-		List<Item> userItems = itemService.getUserItems(user);
-		model.addAttribute("items", userItems);
+		model.addAttribute("items", itemService.getUserItems(user));
 		return "my_items";
 	}
-	
+
 	@GetMapping("/boughtitems")
 	public String getBoughtItems(@SessionAttribute User user, Model model) {
-		List<Item> boughtItemsByUser = itemService.getBoughtItemsByUser(user);
-		model.addAttribute("items", boughtItemsByUser);
+		model.addAttribute("items", itemService.getBoughtItemsByUser(user));
 		return "bought_items";
 	}
-	
-	@GetMapping("/sellitems") 
+
+	@GetMapping("/sellitems")
 	public String sellItems(@SessionAttribute User user, Model model) {
-		List<Item> sellItems = itemService.getSellItems(user);
-		model.addAttribute("items", sellItems);
+		model.addAttribute("items", itemService.getSellItems(user));
 		return "sell_items";
 	}
 	
+	@GetMapping("/itemslist")
+	public String itemsList(@RequestParam Long category, Model model) {
+		model.addAttribute("items", itemService.getItemsByCategory(category));
+		return "items_list";
+	}
+
 }

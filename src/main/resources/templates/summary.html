@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Home Page</title>
+  <title>Summary</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -90,13 +90,13 @@
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Koszt dostawy</strong></td>
-    								<td class="no-line text-right">$15</td>
+    								<td class="no-line text-right">$0</td>
     							</tr>
     							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Do zapłaty</strong></td>
-    								<td class="no-line text-right">$685.99</td>
+    								<td class="no-line text-right" th:text="${session.cart.amount}">$685.99</td>
     							</tr>
     						</tbody>
     					</table>
