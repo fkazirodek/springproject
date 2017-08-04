@@ -23,8 +23,9 @@ public class UserService {
 		if (user.getRole() == null) {
 			user.setRole(DEFAULT_ROLE);
 		}
+		
 		userRepository.save(user);
-		verificationTokenService.generateVerificationToken(user);
+		verificationTokenService.generateVerificationTokenAndSendEmail(user);
 	}
 
 	public User findByUserName(String username) {

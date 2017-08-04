@@ -10,5 +10,6 @@ import pl.simplebuying.model.VerificationToken;
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 
 	VerificationToken findByUser(User user);
+	VerificationToken findByToken(String token);
 
 }

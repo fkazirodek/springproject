@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class VerificationToken implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,21 +22,34 @@ public class VerificationToken implements Serializable {
 	@OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	
+
+	public VerificationToken() {
+	}
+
+	public VerificationToken(String token, User user) {
+		super();
+		this.token = token;
+		this.user = user;
+	}
+
 	public String getToken() {
 		return token;
 	}
+
 	public void setToken(String token) {
 		this.token = token;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public Long getId() {
 		return id;
 	}
-	
+
 }

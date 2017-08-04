@@ -25,6 +25,11 @@ public class OrderController {
 
 	@PostMapping("/summary")
 	public String summaryOfPurchase(Model model, @SessionAttribute User user, @ModelAttribute Order order, RedirectAttributes redirectAttribute) {
+		if (!user.isEnabled()) {
+			redirectAttribute.addFlashAttribute("message",
+					"Musisz aktywować konto w celu złozenia zamówienia(wejdz w link wysłany w wiadomości email)");
+			return "redirect:/shoppingcart";
+		}
 		if (orderService.checkUserAddress(user.getAddress())) {
 			orderService.setOrder(order);
 			String date = orderService.getDateAsString();
@@ -38,10 +43,11 @@ public class OrderController {
 
 	@GetMapping("/summary/confirm")
 	public String confirmationOfPurchase(@SessionAttribute User user, RedirectAttributes redirectAttribute) {
-		if(orderService.saveOrder(user)) {
+		if (orderService.saveOrder(user)) {
 			return "success_order";
 		} else {
-			redirectAttribute.addFlashAttribute("message", "Przedmiot który chcesz kupić jest już niedostępny lub został wyprzedany");
+			redirectAttribute.addFlashAttribute("message",
+					"Przedmiot który chcesz kupić jest już niedostępny lub został wyprzedany");
 			return "redirect:/shoppingcart";
 		}
 	}

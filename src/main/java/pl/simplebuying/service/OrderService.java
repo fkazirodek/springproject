@@ -33,7 +33,7 @@ public class OrderService {
 		this.itemRepository = itemRepository;
 		this.emailService = emailService;
 	}
-	
+
 	public void setOrder(Order order) {
 		this.order = order;
 	}

@@ -19,7 +19,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -50,6 +49,7 @@ public class User implements Serializable {
 	private Address address;
 	@Column(name = "authorization", nullable = false)
 	private String role;
+	@Column(nullable = false)
 	private boolean enabled;
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();

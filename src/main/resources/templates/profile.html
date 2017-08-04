@@ -67,7 +67,16 @@
 								<div class="bot-border"></div>
 
 								<div class="col-sm-5 col-xs-6 tital">Adres email:</div>
-								<div class="col-sm-7" th:text="${session.user.email}"></div>
+								<div class="col-sm-7">
+									<span th:text="${session.user.email}"></span>
+									<span class="glyphicon glyphicon-ok" th:if="${session.user.enabled} == true"></span>
+								</div>
+								<div class="clearfix"></div>
+								<div class="bot-border"></div>
+								
+								<div class="col-sm-5 col-xs-6 tital">Status konta:</div>
+								<div class="col-sm-7" th:if="${session.user.enabled} == true">Aktywne</div>
+								<div class="col-sm-7" th:if="${session.user.enabled} == false">Nieaktywne</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
 
