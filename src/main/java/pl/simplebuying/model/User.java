@@ -55,6 +55,8 @@ public class User implements Serializable {
 	private List<Item> userItems = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<>();
 
 	public User() {
 		this.enabled = false;
@@ -153,5 +155,12 @@ public class User implements Serializable {
 		this.orders = orders;
 	}
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 }

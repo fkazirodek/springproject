@@ -42,10 +42,9 @@ public class OrderService {
 		return address == null ? false : true;
 	}
 
-	public String getDateAsString() {
-		LocalDate date = LocalDate.now();
+	public String getDateAsString(LocalDate localDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu");
-		String formattedDate = date.format(formatter);
+		String formattedDate = localDate.format(formatter);
 		return formattedDate;
 	}
 
@@ -67,7 +66,6 @@ public class OrderService {
 		order.setItems(items);
 		order.setUser(buyer);
 		order.setAmountOfOrder(shoppingCart.getAmount());
-		order.setOrderDate(getDateAsString());
 	}
 
 	private boolean checkItemQuantity(List<Item> items) {

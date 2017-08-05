@@ -1,0 +1,8 @@
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+
+.widget .mic-info { color: #666666;font-size: 10px; }
+.widget .comment-text { font-size: 13px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }

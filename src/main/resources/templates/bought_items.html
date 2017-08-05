@@ -29,6 +29,7 @@
 					<a href="#" th:href="@{/sellitems}" class="list-group-item">Sprzedane przedmioty</a> 
 					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a> 
 					<a href="#" th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a>
+					<a href="#" th:href="@{/comment/all}" class="list-group-item">Komentarze</a>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -63,6 +64,11 @@
 
 												</div>
 											</div>
+											 <form th:action="@{/comment/new}" method="post">
+												   <input type="hidden" name="seller" th:value="${item.seller.username}"/>
+												   <p><input class="btn btn-primary pull-right" type="submit" value="Wystaw komentarz" />
+												   <span class="glyphicon glyphicon-edit"></span></p>
+											</form>
 										</div>
 										<!-- item -->
 									</div>
@@ -80,9 +86,6 @@
 
 		</div>
 	</div>
-
-
-
 
 </body>
 </html>

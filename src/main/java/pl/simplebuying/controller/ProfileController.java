@@ -39,7 +39,7 @@ public class ProfileController {
 	@PostMapping("/update_address")
 	public String updateAddress(@ModelAttribute Address address, @SessionAttribute User user) {
 		user.setAddress(address);
-		userService.saveUserInDB(user);
+		userService.updateAddress(address, user);
 		return "redirect:/profile";
 	}
 	

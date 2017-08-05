@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Profile</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css"
+	th:href="@{/css/style.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:include="fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-8">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4>Wystaw przedmiot na sprzedaż</h4>
+					</div>
+					<div class="panel-body">
+
+						<div class="box box-info">
+
+							<div class="box-body">
+
+								<form class="form-horizontal" th:action="@{/comment/add}" method="post" th:object="${comment}">
+									<fieldset>
+
+										<!-- Select Basic -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="selectbasic">Komentarz</label>
+											<div class="col-md-4">
+												<select id="selectbasic" name="selectbasic"
+													class="form-control" th:field="*{positive}">
+													<option th:value="true">Pozytywny</option>
+													<option th:value="false">Negatywny</option>
+												</select>
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="commentName">Nazwa
+												komentarza</label>
+											<div class="col-md-4">
+												<input id="commentName" name="commentName" class="form-control input-md" 
+												type="text" th:field="*{name}"/>
+
+											</div>
+										</div>
+
+										<!-- Textarea -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="textComment">Treść
+												komentarza</label>
+											<div class="col-md-4">
+												<textarea class="form-control" id="textComment"
+													name="textComment" th:field="*{text}"></textarea>
+											</div>
+										</div>
+
+										<!-- Button -->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="confirm"></label>
+											<div class="col-md-4">
+												<button id="confirm" name="confirm" class="btn btn-primary">Dodaj</button>
+											</div>
+										</div>
+
+									</fieldset>
+								</form>
+
+
+
+								<!-- /.box-body -->
+							</div>
+							<!-- /.box -->
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

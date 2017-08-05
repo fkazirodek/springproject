@@ -2,6 +2,7 @@ package pl.simplebuying.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ public class Order implements Serializable {
 	@Column(name = "amount")
 	private BigDecimal amountOfOrder;
 	@Column(name = "order_date")
-	private String orderDate;
+	private LocalDate orderDate;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -41,6 +42,7 @@ public class Order implements Serializable {
 	private List<Item> items;
 
 	public Order() {
+		orderDate = LocalDate.now();
 	}
 
 	public Order(String orderDetails) {
@@ -67,11 +69,11 @@ public class Order implements Serializable {
 		this.amountOfOrder = amountOfOrder;
 	}
 	
-	public String getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Comments</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" href="/css.comments.css" th:href="@{/css/comments.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:include="fragments :: navbar"></div>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel użytkownika</h3>
+					</div>
+					<a href="#" th:href="@{/profile}" class="list-group-item active">Moj Profil</a> 
+					<a href="#" th:href="@{/boughtitems}" class="list-group-item">Kupione przedmioty</a> 
+					<a href="#" th:href="@{/sellitems}" class="list-group-item">Sprzedane przedmioty</a> 
+					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a> 
+					<a href="#" th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a> 
+					<a href="#" th:href="@{/comment/all}" class="list-group-item">Komentarze</a>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="panel panel-default widget">
+					<div class="panel-heading">
+						<span class="glyphicon glyphicon-comment"></span>
+						<h3 class="panel-title">Komentarze</h3>
+						<span class="label label-info" th:text="${comments.size()}"> 78</span>
+					</div>
+					<div class="panel-body">
+						<ul class="list-group">
+							<li class="list-group-item" th:each="comment : ${comments}">
+								<div class="row">
+
+									<div class="col-xs-10 col-md-11">
+										<div>
+											<h4 th:if="${comment.positive}">Pozytywny</h4>
+											<h4 th:if="${comment.positive} == false">Negatywny</h4>
+											<p th:text="${comment.name}">Google Style</p>
+
+											<div class="mic-info">
+												Wystawił: <a href="#">username</a> <span th:text="${comment.getLocalDateAsString()}">2 Aug 2013</span>
+											</div>
+										</div>
+										<div class="comment-text" th:text="${comment.text}">Opis</div>
+									</div>
+								</div>
+							</li>
+
+						</ul>
+						<a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span
+							class="glyphicon glyphicon-refresh"></span> More</a>
+					</div>
+				</div>
+
+
+
+
+				>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>

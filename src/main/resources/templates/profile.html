@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Profile</title>
@@ -29,6 +29,7 @@
 					<a href="#" th:href="@{/sellitems}" class="list-group-item">Sprzedane przedmioty</a> 
 					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a> 
 					<a href="#" th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a>
+					<a href="#" th:href="@{/comment/all}" class="list-group-item">Komentarze</a>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -100,6 +101,8 @@
 									th:text="${session.user.address.zipCode}">nie podano</div>
 								<div class="clearfix"></div>
 								<div class="bot-border"></div>
+								<a href="#" th:href="@{/profile/update_address}" class="btn btn-sm btn-info">Zmień adres <span class="glyphicon glyphicon-wrench"></span></a>
+								
 								<!-- /.box-body -->
 							</div>
 							<!-- /.box -->
@@ -108,7 +111,6 @@
 
 					</div>
 				</div>
-				<a href="#" th:href="@{/profile/update_address}" class="btn btn-sm btn-info">Zmień adres <span class="glyphicon glyphicon-wrench"></span></a>
 			</div>
 			
 		</div>

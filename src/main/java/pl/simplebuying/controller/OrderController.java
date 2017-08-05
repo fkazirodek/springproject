@@ -32,7 +32,7 @@ public class OrderController {
 		}
 		if (orderService.checkUserAddress(user.getAddress())) {
 			orderService.setOrder(order);
-			String date = orderService.getDateAsString();
+			String date = orderService.getDateAsString(order.getOrderDate());
 			model.addAttribute("date", date);
 			return "summary";
 		} else {
