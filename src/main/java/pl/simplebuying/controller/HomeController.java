@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pl.simplebuying.model.ShoppingCart;
-import pl.simplebuying.model.User;
 import pl.simplebuying.service.ItemService;
 import pl.simplebuying.service.UserService;
 
@@ -30,16 +29,20 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model, HttpSession session, Authentication auth) {
 		saveAuthenticatedUserInSession(session, auth);
-		session.setAttribute("cart", shoppingCart);
+		saveShoppingCartInSession(session);
 		model.addAttribute("items", itemService.getAllItems());
 		return "index";
 	}
 
 	private void saveAuthenticatedUserInSession(HttpSession session, Authentication auth) {
 		if(session.getAttribute("user") == null && auth != null && auth.isAuthenticated()) {
-			User user = userService.findByUserName(auth.getName());
-			session.setAttribute("user", user);
-			session.setAttribute("address", user.getAddress());
+			session.setAttribute("user", userService.findByUserName(auth.getName()));
+		}
+	}
+	
+	private void saveShoppingCartInSession(HttpSession session) {
+		if(session.getAttribute("cart") == null) {
+			session.setAttribute("cart", shoppingCart);
 		}
 	}
 }

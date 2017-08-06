@@ -1,8 +1,6 @@
 package pl.simplebuying.service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 import pl.simplebuying.model.Address;
 import pl.simplebuying.model.Item;
 import pl.simplebuying.model.Order;
+import pl.simplebuying.model.Payment;
 import pl.simplebuying.model.ShoppingCart;
 import pl.simplebuying.model.User;
 import pl.simplebuying.repository.ItemRepository;
@@ -27,14 +26,16 @@ public class OrderService {
 	private Order order;
 
 	@Autowired
-	public OrderService(ShoppingCart shoppingCart, OrderRepository orderRepository, ItemRepository itemRepository, EmailService emailService) {
+	public OrderService(ShoppingCart shoppingCart, OrderRepository orderRepository, ItemRepository itemRepository,
+			EmailService emailService) {
 		this.shoppingCart = shoppingCart;
 		this.orderRepository = orderRepository;
 		this.itemRepository = itemRepository;
 		this.emailService = emailService;
 	}
 
-	public void setOrder(Order order) {
+	public void savePaymentInOrder(Order order, Payment payment) {
+		order.setPayment(payment);
 		this.order = order;
 	}
 
@@ -42,13 +43,7 @@ public class OrderService {
 		return address == null ? false : true;
 	}
 
-	public String getDateAsString(LocalDate localDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu");
-		String formattedDate = localDate.format(formatter);
-		return formattedDate;
-	}
-
-	public boolean saveOrder(User buyer) {
+	public boolean checkAndSaveOrder(User buyer) {
 		List<Item> itemsInCart = shoppingCart.getItemsInCart();
 		createOrder(buyer, itemsInCart);
 		if (checkItemQuantity(itemsInCart)) {
@@ -59,13 +54,13 @@ public class OrderService {
 		} else {
 			return false;
 		}
-
 	}
 
 	private void createOrder(User buyer, List<Item> items) {
 		order.setItems(items);
 		order.setUser(buyer);
-		order.setAmountOfOrder(shoppingCart.getAmount());
+		BigDecimal fullAmountOrder = shoppingCart.getAmount().add(order.getPayment().getDeliveryCosts());
+		order.setAmountOfOrder(fullAmountOrder);
 	}
 
 	private boolean checkItemQuantity(List<Item> items) {

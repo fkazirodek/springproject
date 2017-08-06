@@ -50,7 +50,8 @@
 											<p th:text="${comment.name}">Google Style</p>
 
 											<div class="mic-info">
-												Wystawił: <a href="#">username</a> <span th:text="${comment.getLocalDateAsString()}">2 Aug 2013</span>
+												Wystawił: <a href="#" th:text="${comment.sender.username}">username</a> 
+												<span th:text="${comment.getLocalDateAsString()}">2 Aug 2013</span>
 											</div>
 										</div>
 										<div class="comment-text" th:text="${comment.text}">Opis</div>
@@ -65,9 +66,6 @@
 				</div>
 
 
-
-
-				>
 			</div>
 		</div>
 	</div>

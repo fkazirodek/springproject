@@ -10,7 +10,7 @@ import pl.simplebuying.model.Comment;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-	List<Comment> findByUser_id(Long id);
+	List<Comment> findByReceiver_id(Long id);
 	
 	List<Comment> findByPositive(boolean condition);
 }

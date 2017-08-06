@@ -35,7 +35,7 @@ public class RegisterController {
 	public String registerUser(@Valid @ModelAttribute User user, BindingResult results) {
 		if (results.hasErrors()) {
 			return "register";
-		}
+		} 
 		userService.saveUserInDB(user);
 		return "redirect:/login";
 	}

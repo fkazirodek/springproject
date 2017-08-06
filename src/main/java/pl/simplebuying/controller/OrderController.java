@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.simplebuying.model.Order;
+import pl.simplebuying.model.Payment;
 import pl.simplebuying.model.User;
 import pl.simplebuying.service.OrderService;
 
@@ -24,16 +25,19 @@ public class OrderController {
 	}
 
 	@PostMapping("/summary")
-	public String summaryOfPurchase(Model model, @SessionAttribute User user, @ModelAttribute Order order, RedirectAttributes redirectAttribute) {
+	public String summaryOfPurchase(@SessionAttribute User user, 
+									@ModelAttribute Order order, 
+								    @ModelAttribute Payment payment, 
+								    Model model,
+									RedirectAttributes redirectAttribute) {
 		if (!user.isEnabled()) {
 			redirectAttribute.addFlashAttribute("message",
 					"Musisz aktywować konto w celu złozenia zamówienia(wejdz w link wysłany w wiadomości email)");
 			return "redirect:/shoppingcart";
 		}
 		if (orderService.checkUserAddress(user.getAddress())) {
-			orderService.setOrder(order);
-			String date = orderService.getDateAsString(order.getOrderDate());
-			model.addAttribute("date", date);
+			orderService.savePaymentInOrder(order, payment);
+			model.addAttribute("order", order);
 			return "summary";
 		} else {
 			redirectAttribute.addFlashAttribute("message", "Musisz uzupełnic swój adres w celu złożenia zamówienia");
@@ -43,7 +47,7 @@ public class OrderController {
 
 	@GetMapping("/summary/confirm")
 	public String confirmationOfPurchase(@SessionAttribute User user, RedirectAttributes redirectAttribute) {
-		if (orderService.saveOrder(user)) {
+		if (orderService.checkAndSaveOrder(user)) {
 			return "success_order";
 		} else {
 			redirectAttribute.addFlashAttribute("message",

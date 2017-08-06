@@ -72,8 +72,10 @@
 						<div class="row text-center">
 							<div class="col-xs-6">
 								<div class="form-group">
-									<select name="payment" class="form-control">
-										<option >
+									<select name="payment" class="form-control" th:field="*{payment}">
+										<option th:each="payment : ${payments}"
+												th:value="${payment.id}"
+												th:text="${payment.paymentMethod}">
 										</option>
 									</select>
 								</div>

@@ -3,6 +3,7 @@ package pl.simplebuying.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_order")
@@ -35,10 +36,13 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	@ManyToOne
+	@JoinColumn(name = "payment_id")
+	private Payment payment;
 	@ManyToMany
 	@JoinTable(name = "order_item", 
-		  	   joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id_order"), 
-			   inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id_item"))
+				joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id_order"),
+				inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id_item"))
 	private List<Item> items;
 
 	public Order() {
@@ -68,7 +72,7 @@ public class Order implements Serializable {
 	public void setAmountOfOrder(BigDecimal amountOfOrder) {
 		this.amountOfOrder = amountOfOrder;
 	}
-	
+
 	public LocalDate getOrderDate() {
 		return orderDate;
 	}
@@ -85,12 +89,26 @@ public class Order implements Serializable {
 		this.user = user;
 	}
 
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 	public List<Item> getItems() {
 		return items;
 	}
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+	
+	public String getDateAsString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu");
+		String formattedDate = orderDate.format(formatter);
+		return formattedDate;
 	}
 
 }

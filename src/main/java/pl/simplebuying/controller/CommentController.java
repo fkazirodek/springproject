@@ -1,5 +1,6 @@
 package pl.simplebuying.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,13 @@ public class CommentController {
 
 	private CommentService commentService;
 
+	@Autowired
 	public CommentController(CommentService commentService) {
 		this.commentService = commentService;
 	}
 
 	@PostMapping("/comment/new")
 	public String comment(@RequestParam String seller, Model model) {
-		System.out.println(seller);
 		commentService.setUsername(seller);
 		model.addAttribute("comment", new Comment());
 		return "add_comment";
@@ -31,13 +32,13 @@ public class CommentController {
 
 	@PostMapping("/comment/add")
 	public String addComment(@ModelAttribute Comment comment, @SessionAttribute User user) {
-		commentService.addCommentToDB(comment);
+		commentService.addCommentToDB(comment, user);
 		return "redirect:/profile";
 	}
 
 	@GetMapping("comment/all")
 	public String allComments(@SessionAttribute User user, Model model) {
-		model.addAttribute("comments", commentService.getAllComments(user));
+		model.addAttribute("comments", commentService.getAllReceivedComments(user));
 		return "comments";
 	}
 }

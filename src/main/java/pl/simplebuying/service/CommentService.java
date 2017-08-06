@@ -22,22 +22,22 @@ public class CommentService {
 
 	public void setUsername(String username) {
 		this.username = username;
-
 	}
 
-	public void addCommentToDB(Comment comment) {
-		comment.setUser(userRepository.findByUsername(username));
+	public void addCommentToDB(Comment comment, User sender) {
+		comment.setReceiver(userRepository.findByUsername(username));
+		comment.setSender(userRepository.findByUsername(sender.getUsername()));
 		commentRepository.save(comment);
 	}
 
-	public List<Comment> getAllComments(User user) {
-		return commentRepository.findByUser_id(user.getId());
+	public List<Comment> getAllReceivedComments(User user) {
+		return commentRepository.findByReceiver_id(user.getId());
 	}
 
 	public List<Comment> getPositiveComments() {
 		return commentRepository.findByPositive(true);
 	}
-	
+
 	public List<Comment> getNegativeComments() {
 		return commentRepository.findByPositive(false);
 	}

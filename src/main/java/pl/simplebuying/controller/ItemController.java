@@ -35,8 +35,7 @@ public class ItemController {
 	}
 
 	@PostMapping("/additem")
-	public String saveItem(@Valid @ModelAttribute Item item, BindingResult result, @ModelAttribute Category category,
-			@SessionAttribute User user, Model model) {
+	public String saveItem(@Valid @ModelAttribute Item item, BindingResult result, @ModelAttribute Category category, @SessionAttribute User user, Model model) {
 		if (result.hasErrors()) {
 			return "add_item";
 		} else {
@@ -52,7 +51,7 @@ public class ItemController {
 	}
 
 	@GetMapping("/boughtitems")
-	public String getBoughtItems(@SessionAttribute User user, Model model) {
+	public String boughtItems(@SessionAttribute User user, Model model) {
 		model.addAttribute("items", itemService.getBoughtItemsByUser(user));
 		return "bought_items";
 	}

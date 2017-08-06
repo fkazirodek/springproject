@@ -11,13 +11,17 @@ import pl.simplebuying.service.VerificationTokenService;
 @Controller
 public class VerificationController {
 
-	@Autowired
 	VerificationTokenService tokenService;
-	
+
+	@Autowired
+	public VerificationController(VerificationTokenService tokenService) {
+		this.tokenService = tokenService;
+	}
+
 	@GetMapping("/emailconfirm")
 	public String verify(@RequestParam String token, RedirectAttributes redirectAttribute) {
 		if(tokenService.verifyToken(token)) {
-			redirectAttribute.addFlashAttribute("message", "Pomyślnie zweryfikowano adres email. Zaloguj się ponownie aby potwierdzić zmiany");
+			redirectAttribute.addFlashAttribute("message", "Pomyślnie zweryfikowano adres email.");
 		} else {
 			redirectAttribute.addFlashAttribute("message", "Nie udało sie zweryfikować adresu email");
 		}

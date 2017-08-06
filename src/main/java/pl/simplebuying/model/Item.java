@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 @Entity
 public class Item implements Serializable {
 

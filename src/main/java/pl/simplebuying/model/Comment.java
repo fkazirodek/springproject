@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
 
 	@Id
@@ -27,18 +29,25 @@ public class Comment {
 	@NotNull
 	private boolean positive;
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	@JoinColumn(name = "receiver_id", nullable = false)
+	private User receiver;
+	@ManyToOne
+	@JoinColumn(name = "sender_id")
+	private User sender;
 
 	public Comment() {
 		date = LocalDate.now();
 	}
 
-	public Comment(String name, String text, boolean positive, User user) {
+	public Comment(String name, String text, boolean positive, User receiver) {
 		this.name = name;
 		this.text = text;
 		this.positive = positive;
-		this.user = user;
+		this.receiver = receiver;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -73,16 +82,20 @@ public class Comment {
 		this.positive = positive;
 	}
 
-	public User getUser() {
-		return user;
+	public User getReceiver() {
+		return receiver;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setReceiver(User receiver) {
+		this.receiver = receiver;
 	}
 
-	public Long getId() {
-		return id;
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
 	}
 
 	public String getLocalDateAsString() {

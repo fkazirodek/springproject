@@ -55,7 +55,7 @@ public class User implements Serializable {
 	private List<Item> userItems = new ArrayList<>();
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
 
 	public User() {

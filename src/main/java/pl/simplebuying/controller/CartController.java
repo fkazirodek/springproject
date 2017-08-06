@@ -9,16 +9,19 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.simplebuying.model.Order;
+import pl.simplebuying.service.PaymentService;
 import pl.simplebuying.service.ShoppingCartService;
 
 @Controller
 public class CartController {
 
 	private ShoppingCartService shoppingCartService;
+	private PaymentService paymentService;
 
 	@Autowired
-	public CartController(ShoppingCartService shoppingCartService) {
+	public CartController(ShoppingCartService shoppingCartService, PaymentService paymentService) {
 		this.shoppingCartService = shoppingCartService;
+		this.paymentService = paymentService;
 	}
 
 	@PostMapping("/cart/add")
@@ -28,8 +31,7 @@ public class CartController {
 	}
 
 	@GetMapping("/cart/delete")
-	public String deleteItem(@RequestParam String id,
-			@RequestHeader(value = "referer", required = false) String header) {
+	public String deleteItem(@RequestParam String id, @RequestHeader(value = "referer", required = false) String header) {
 		shoppingCartService.deleteItemFromCart(id);
 		return "redirect:" + header;
 	}
@@ -41,6 +43,7 @@ public class CartController {
 			return "index";
 		} else {
 			model.addAttribute("order", new Order());
+			model.addAttribute("payments", paymentService.getAllPayments());
 			return "shopping_cart";
 		}
 	}

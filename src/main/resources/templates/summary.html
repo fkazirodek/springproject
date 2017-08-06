@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-xs-12">
     		<div class="invoice-title">
-    			<h2>Faktura</h2><h3 class="pull-right">Zamówienie # 12345</h3>
+    			<h2>Faktura</h2><h3 class="pull-right">Zamówienie # 1234</h3>
     		</div>
     		<hr/>
     		<div class="row">
@@ -42,13 +42,13 @@
     			<div class="col-xs-6">
     				<address>
     					<strong>Metoda płatności:</strong><br/>
-    					<p></p>
+    					<p th:text="${order.payment.paymentMethod}"></p>
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
     				<address>
     					<strong>Data zamówienia:</strong><br/>
-    					<p th:text="${date}"></p><br/>
+    					<p th:text="${order.getDateAsString()}"></p><br/>
     				</address>
     			</div>
     		</div>
@@ -90,13 +90,13 @@
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Koszt dostawy</strong></td>
-    								<td class="no-line text-right">$0</td>
+    								<td class="no-line text-right" th:text="${order.payment.deliveryCosts}">$0</td>
     							</tr>
     							<tr>
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Do zapłaty</strong></td>
-    								<td class="no-line text-right" th:text="${session.cart.amount}">$685.99</td>
+    								<td class="no-line text-right" th:text="${order.amount}">$685.99</td>
     							</tr>
     						</tbody>
     					</table>

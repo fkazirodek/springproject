@@ -31,8 +31,7 @@ public class ProfileController {
 
 	@GetMapping("/update_address")
 	public String editProfile(Model model) {
-		Address address = new Address();
-		model.addAttribute(address);
+		model.addAttribute("address", new Address());
 		return "edit_profile";
 	}
 

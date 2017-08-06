@@ -20,11 +20,15 @@ import pl.simplebuying.model.VerificationToken;
 @Service
 public class EmailService {
 
-	@Autowired
 	private TemplateEngine templateEngine;
-	@Autowired
 	private JavaMailSender mailSender;
-	
+
+	@Autowired
+	public EmailService(TemplateEngine templateEngine, JavaMailSender mailSender) {
+		this.templateEngine = templateEngine;
+		this.mailSender = mailSender;
+	}
+
 	public void sendEmail(String sendTo, String subject, String content) {
 		MimeMessage mail = mailSender.createMimeMessage();
 		try {
