@@ -64,7 +64,15 @@ public class EmailService {
 		String subject = "Weryfikacja konta w serwisie SimpleBuying";
 		String body = templateEngine.process("email_verification", context);
 		sendEmail(user.getEmail(), subject, body);
-		
 	}
+	
+	public void sendEmailWithPassword(String email, String password) {
+		Context context = new Context();
+		context.setVariable("pass", password);
+		String subject = "Twoje hasło do serwisu SimpleBuying";
+		String body = templateEngine.process("email_password", context);
+		sendEmail(email, subject, body);
+	}
+	
 	
 }

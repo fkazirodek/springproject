@@ -30,10 +30,8 @@
 			    		<div class="form-group">
 			    			<input class="form-control" placeholder="Hasło" name="password" type="password"/>
 			    		</div>
-			    		<div class="checkbox">
-			    	    	<label>
-			    	    		<input name="remember" type="checkbox" value=""/> Zapamiętaj mnie
-			    	    	</label>
+			    		<div class="reminder">
+                            <a href="#" th:href="@{/password/remind}">Zapomniałeś hasła?</a>
 			    	    </div>
 			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Zaloguj"/>
 			    	</fieldset>
