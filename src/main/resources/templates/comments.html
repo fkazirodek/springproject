@@ -23,12 +23,12 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">Panel użytkownika</h3>
 					</div>
-					<a href="#" th:href="@{/profile}" class="list-group-item active">Moj Profil</a> 
-					<a href="#" th:href="@{/boughtitems}" class="list-group-item">Kupione przedmioty</a> 
-					<a href="#" th:href="@{/sellitems}" class="list-group-item">Sprzedane przedmioty</a> 
-					<a href="#" th:href="@{/myitems}" class="list-group-item">Wystawione przedmioty</a> 
-					<a href="#" th:href="@{/additem}" class="list-group-item">Wystaw nowy przedmiot</a> 
-					<a href="#" th:href="@{/comment/all}" class="list-group-item">Komentarze</a>
+					<a href="#" th:href="@{/profile}" class="list-group-item">Moj Profil</a> 
+					<a href="#" th:href="@{/items/bought}" class="list-group-item">Kupione przedmioty</a> 
+					<a href="#" th:href="@{/items/sell}" class="list-group-item">Sprzedane przedmioty</a> 
+					<a href="#" th:href="@{/items/my}" class="list-group-item">Wystawione przedmioty</a> 
+					<a href="#" th:href="@{/item/add}" class="list-group-item">Wystaw nowy przedmiot</a> 
+					<a href="#" th:href="@{/comment/all}" class="list-group-item active">Komentarze</a>
 				</div>
 			</div>
 			<div class="col-md-9">
@@ -37,6 +37,21 @@
 						<span class="glyphicon glyphicon-comment"></span>
 						<h3 class="panel-title">Komentarze</h3>
 						<span class="label label-info" th:text="${comments.size()}"> 78</span>
+						
+						<form class="form-inline" th:action="@{/comment/all}" method="post">
+		                    <!-- Select Basic -->
+		                    <div class="form-group">
+		                      <div class="col-md-6">
+		                        <select id="selectbasic" name="positive" class="form-control">
+		                          <option value="true">Pozytywne</option>
+		                          <option value="false">Negatywne</option>
+		                        </select>
+		                      </div>
+		                        <div class="col-md-6">
+		                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Wybierz</button>
+		                      </div>
+		                    </div>
+                		</form>
 					</div>
 					<div class="panel-body">
 						<ul class="list-group">
@@ -47,11 +62,11 @@
 										<div>
 											<h4 th:if="${comment.positive}">Pozytywny</h4>
 											<h4 th:if="${comment.positive} == false">Negatywny</h4>
-											<p th:text="${comment.name}">Google Style</p>
+											<p th:text="${comment.name}">Name</p>
 
 											<div class="mic-info">
 												Wystawił: <a href="#" th:text="${comment.sender.username}">username</a> 
-												<span th:text="${comment.getLocalDateAsString()}">2 Aug 2013</span>
+												<span th:text="${comment.getLocalDateAsString()}">date</span>
 											</div>
 										</div>
 										<div class="comment-text" th:text="${comment.text}">Opis</div>

@@ -34,11 +34,19 @@ public class CommentService {
 		return commentRepository.findByReceiver_id(user.getId());
 	}
 
-	public List<Comment> getPositiveComments() {
+	public List<Comment> getSelectComments(boolean positive) {
+		if(positive) {
+			return getPositiveComments();
+		} else {
+			return getNegativeComments();
+		}
+	}
+	
+	private List<Comment> getPositiveComments() {
 		return commentRepository.findByPositive(true);
 	}
 
-	public List<Comment> getNegativeComments() {
+	private List<Comment> getNegativeComments() {
 		return commentRepository.findByPositive(false);
 	}
 }

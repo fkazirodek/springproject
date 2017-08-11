@@ -27,14 +27,14 @@ public class ItemController {
 		this.itemService = itemService;
 	}
 
-	@GetMapping("/additem")
+	@GetMapping("/item/add")
 	public String addAttributes(Model model) {
 		model.addAttribute("item", new Item());
 		model.addAttribute("categories", itemService.getAllCategories());
 		return "add_item";
 	}
 
-	@PostMapping("/additem")
+	@PostMapping("/item/add")
 	public String saveItem(@Valid @ModelAttribute Item item, BindingResult result, @ModelAttribute Category category, @SessionAttribute User user, Model model) {
 		if (result.hasErrors()) {
 			return "add_item";
@@ -44,19 +44,19 @@ public class ItemController {
 		}
 	}
 
-	@GetMapping("/myitems")
+	@GetMapping("/items/my")
 	public String getMyItems(Model model, @SessionAttribute User user) {
 		model.addAttribute("items", itemService.getUserItems(user));
 		return "my_items";
 	}
 
-	@GetMapping("/boughtitems")
+	@GetMapping("/items/bought")
 	public String boughtItems(@SessionAttribute User user, Model model) {
 		model.addAttribute("items", itemService.getBoughtItemsByUser(user));
 		return "bought_items";
 	}
 
-	@GetMapping("/sellitems")
+	@GetMapping("/items/sell")
 	public String sellItems(@SessionAttribute User user, Model model) {
 		model.addAttribute("items", itemService.getSellItems(user));
 		return "sell_items";

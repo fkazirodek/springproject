@@ -36,7 +36,7 @@ public class OrderController {
 			return "redirect:/shoppingcart";
 		}
 		if (orderService.checkUserAddress(user.getAddress())) {
-			orderService.savePaymentInOrder(order, payment);
+			orderService.createOrder(order, payment, user);
 			model.addAttribute("order", order);
 			return "summary";
 		} else {

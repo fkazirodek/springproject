@@ -41,4 +41,10 @@ public class CommentController {
 		model.addAttribute("comments", commentService.getAllReceivedComments(user));
 		return "comments";
 	}
+	
+	@PostMapping("/comment/all")
+	public String SelectedComments(@RequestParam boolean positive, Model model) {
+		model.addAttribute("comments", commentService.getSelectComments(positive));
+		return "comments";
+	}
 }

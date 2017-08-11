@@ -24,17 +24,17 @@
     			<div class="col-xs-6">
     				<address>
     				<strong>Faktura na:</strong><br/>
-    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p>
-    					<p th:text="|${session.user.address.city} ${session.user.address.zipCode}|"></p>
-    					<p th:text="${session.user.address.street}"></p>
+    					<p th:text="|${order.user.firstName} ${order.user.lastName}|"></p>
+    					<p th:text="|${order.user.address.city} ${order.user.address.zipCode}|"></p>
+    					<p th:text="${order.user.address.street}"></p>
     				</address>
     			</div>
     			<div class="col-xs-6 text-right">
     				<address>
         			<strong>Adres wysyłki:</strong><br/>
-    					<p th:text="|${session.user.firstName} ${session.user.lastName}|"></p>
-    					<p th:text="|${session.user.address.city} ${session.user.address.zipCode}|"></p>
-    					<p th:text="${session.user.address.street}"></p>
+    					<p th:text="|${order.user.firstName} ${order.user.lastName}|"></p>
+    					<p th:text="|${order.user.address.city} ${order.user.address.zipCode}|"></p>
+    					<p th:text="${order.user.address.street}"></p>
     				</address>
     			</div>
     		</div>
@@ -74,7 +74,7 @@
     						</thead>
     						<tbody>
     							<!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                <tr th:each="item : ${session.cart.itemsInCart}">
+                                <tr th:each="item : ${order.items}">
             						<td th:text="${item.itemName}">Name</td>
     								<td class="text-center" th:text="${item.price}">Cena</td>
     								<td class="text-center">1</td>
@@ -96,7 +96,7 @@
     								<td class="no-line"></td>
     								<td class="no-line"></td>
     								<td class="no-line text-center"><strong>Do zapłaty</strong></td>
-    								<td class="no-line text-right" th:text="${order.amount}">$685.99</td>
+    								<td class="no-line text-right" th:text="${order.amountOfOrder}">$685.99</td>
     							</tr>
     						</tbody>
     					</table>

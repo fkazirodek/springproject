@@ -34,7 +34,11 @@ public class OrderService {
 		this.emailService = emailService;
 	}
 
-	public void savePaymentInOrder(Order order, Payment payment) {
+	public void createOrder(Order order, Payment payment, User buyer) {
+		order.setItems(shoppingCart.getItemsInCart());
+		order.setUser(buyer);
+		BigDecimal fullAmountOrder = shoppingCart.getAmount().add(order.getPayment().getDeliveryCosts());
+		order.setAmountOfOrder(fullAmountOrder);
 		order.setPayment(payment);
 		this.order = order;
 	}
@@ -44,8 +48,7 @@ public class OrderService {
 	}
 
 	public boolean checkAndSaveOrder(User buyer) {
-		List<Item> itemsInCart = shoppingCart.getItemsInCart();
-		createOrder(buyer, itemsInCart);
+		List<Item> itemsInCart = order.getItems();
 		if (checkItemQuantity(itemsInCart)) {
 			orderRepository.save(order);
 			emailService.sendOrderEmailToBuyer(buyer, order);
@@ -54,13 +57,6 @@ public class OrderService {
 		} else {
 			return false;
 		}
-	}
-
-	private void createOrder(User buyer, List<Item> items) {
-		order.setItems(items);
-		order.setUser(buyer);
-		BigDecimal fullAmountOrder = shoppingCart.getAmount().add(order.getPayment().getDeliveryCosts());
-		order.setAmountOfOrder(fullAmountOrder);
 	}
 
 	private boolean checkItemQuantity(List<Item> items) {
