@@ -24,3 +24,6 @@ VALUES ("Płatność przy odbiorze", 15);
 
 INSERT INTO payments(method, delivery_costs)
 VALUES ("Odbiór osobisty", 0);
+
+INSERT INTO user_role(role) 
+VALUES ("ROLE_USER");

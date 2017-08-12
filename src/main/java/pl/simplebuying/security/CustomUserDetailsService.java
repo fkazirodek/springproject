@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import pl.simplebuying.model.User;
+import pl.simplebuying.model.UserRole;
 import pl.simplebuying.repository.UserRepository;
 
 public class CustomUserDetailsService implements UserDetailsService {
@@ -25,13 +26,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("username not found in database");
 		}
 		org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(
-				user.getUsername(), user.getPassword(), addAuthorities(user.getRole()));
+				user.getUsername(), user.getPassword(), addAuthorities(user.getRoles()));
 		return userDetails;
 	}
 
-	private Set<GrantedAuthority> addAuthorities(String userRole) {
+	private Set<GrantedAuthority> addAuthorities(Set<UserRole> userRoles) {
 		Set<GrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority(userRole));
+		for (UserRole ur : userRoles) {
+			authorities.add(new SimpleGrantedAuthority(ur.getRole()));
+		}
 		return authorities;
 	}
 

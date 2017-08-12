@@ -20,8 +20,8 @@ public class VerificationController {
 
 	@GetMapping("/emailconfirm")
 	public String verify(@RequestParam String token, RedirectAttributes redirectAttribute) {
-		if(tokenService.verifyToken(token)) {
-			redirectAttribute.addFlashAttribute("message", "Pomyślnie zweryfikowano adres email.");
+		if(tokenService.isVerifyToken(token)) {
+			redirectAttribute.addFlashAttribute("message", "Pomyślnie zweryfikowano adres email");
 		} else {
 			redirectAttribute.addFlashAttribute("message", "Nie udało sie zweryfikować adresu email");
 		}

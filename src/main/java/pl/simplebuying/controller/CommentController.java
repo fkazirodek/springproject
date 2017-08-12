@@ -25,7 +25,7 @@ public class CommentController {
 
 	@PostMapping("/comment/new")
 	public String comment(@RequestParam String seller, Model model) {
-		commentService.setUsername(seller);
+		commentService.setReceiverComment(seller);
 		model.addAttribute("comment", new Comment());
 		return "add_comment";
 	}
@@ -44,7 +44,7 @@ public class CommentController {
 	
 	@PostMapping("/comment/all")
 	public String SelectedComments(@RequestParam boolean positive, Model model) {
-		model.addAttribute("comments", commentService.getSelectComments(positive));
+		model.addAttribute("comments", commentService.getPositiveOrNegativeComments(positive));
 		return "comments";
 	}
 }

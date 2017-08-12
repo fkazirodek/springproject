@@ -2,15 +2,19 @@ package pl.simplebuying.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -47,14 +51,18 @@ public class User implements Serializable {
 	private String password;
 	@Embedded
 	private Address address;
-	@Column(name = "authorization", nullable = false)
-	private String role;
 	@Column(nullable = false)
 	private boolean enabled;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<UserRole> roles = new HashSet<>();
+	
 	@OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
 	private List<Item> userItems = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
 
@@ -123,20 +131,20 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public boolean isEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Set<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<UserRole> roles) {
+		this.roles = roles;
 	}
 
 	public List<Item> getUserItems() {
