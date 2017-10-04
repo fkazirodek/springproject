@@ -33,7 +33,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		Item itemById = itemService.findItemByID(id);
 		Integer quantity = itemById.getQuantity();
 		if (quantity > 0) {
-				cart.getItemsInCart().add(itemById);
+				getItemsInCart().add(itemById);
 				cart.calculateAmount();
 			}
 		}

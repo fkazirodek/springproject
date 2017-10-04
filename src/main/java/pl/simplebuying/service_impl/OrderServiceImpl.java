@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService{
 	private EmailService emailService;
 
 	private Order order;
-
+	
 	@Autowired
 	public OrderServiceImpl(ShoppingCart shoppingCart, OrderRepository orderRepository, ItemRepository itemRepository,
 			EmailService emailService) {
@@ -34,6 +34,10 @@ public class OrderServiceImpl implements OrderService{
 		this.orderRepository = orderRepository;
 		this.itemRepository = itemRepository;
 		this.emailService = emailService;
+	}
+	
+	public Order getOrder() {
+		return order;
 	}
 
 	@Override
