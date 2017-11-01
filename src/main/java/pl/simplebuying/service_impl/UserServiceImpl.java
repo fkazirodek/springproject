@@ -30,11 +30,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void saveUserInDB(User user) {
+	public boolean saveUserInDB(User user) {
 		UserRole userRole = roleRepository.findByRole(DEFAULT_ROLE);
 		user.getRoles().add(userRole);
-		userRepository.save(user);
+		User userInDb = userRepository.save(user);
 		verificationTokenService.generateVerificationTokenAndSendEmail(user);
+		return userInDb != null ? true : false;
 	}
 
 	@Override

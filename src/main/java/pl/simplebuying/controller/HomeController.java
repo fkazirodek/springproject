@@ -12,7 +12,7 @@ import pl.simplebuying.model.ShoppingCart;
 import pl.simplebuying.service.ItemService;
 import pl.simplebuying.service.UserService;
 
-@Controller
+@Controller("/")
 public class HomeController {
 
 	private ItemService itemService;
@@ -26,7 +26,7 @@ public class HomeController {
 		this.userService = userService;
 	}
 
-	@GetMapping("/")
+	@GetMapping
 	public String home(Model model, HttpSession session, Authentication auth) {
 		saveAuthenticatedUserInSession(session, auth);
 		saveShoppingCartInSession(session);

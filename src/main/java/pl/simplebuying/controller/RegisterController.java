@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.simplebuying.model.User;
 import pl.simplebuying.service.UserService;
 
-
 @Controller
 @RequestMapping("/register")
 public class RegisterController {

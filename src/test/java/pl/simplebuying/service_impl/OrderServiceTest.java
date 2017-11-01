@@ -99,7 +99,7 @@ public class OrderServiceTest {
 	}
  	
 	@Test
-	public void orderItemsIsNotEmpty() {
+	public void itemsInOrderIsNotEmpty() {
 		assertFalse(orderService.getOrder().getItems().isEmpty());
 	}
 	
