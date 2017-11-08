@@ -28,6 +28,7 @@ public class ShoppingCartServiceTest {
 	ItemServiceImpl itemService;
 	@Mock
 	CategoryRepository categoryRepository;
+	
 	ShoppingCartServiceImpl shoppingCartService;
 	Item item;
 	Item item2;
