@@ -27,3 +27,6 @@ VALUES ("Odbiór osobisty", 0);
 
 INSERT INTO user_role(role) 
 VALUES ("ROLE_USER");
+
+
+INSERT INTO users(id_user, firstname, lastname, username, email, password, enabled) VALUES(1, "Jan", "Kowalski", "jankow", "jankowalski@email.com", "1234567", 1);

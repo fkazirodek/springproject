@@ -10,18 +10,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import pl.simplebuying.model.User;
-import pl.simplebuying.model.UserRole;
-import pl.simplebuying.repository.UserRepository;
+import pl.simplebuying.domain.user.User;
+import pl.simplebuying.domain.user.UserRole;
+import pl.simplebuying.domain.user.UserService;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
+		User user = userService.findByUserName(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("username not found in database");
 		}
